@@ -18,15 +18,26 @@ export default function sidebar(props){
                     </NavLink>
                 </li>
                 <li key={Math.random(10)}>
-                    <NavLink to='/admin/requests' className="link" activeClassName="active-link">
+                    <NavLink to='/admin/2' className="link" activeClassName="active-link">
                         <img src={Tick} alt="icon" className="icon" />
                         Requests 
                     </NavLink>
                 </li>
                 <li key={Math.random(10)}>
-                    <NavLink to='/admin/budget' className="link" activeClassName="active-link">
+                    <NavLink to='/admin/3' className="link" activeClassName="active-link">
                         <img src={Coin} alt="icon" className="icon" />
                         Budget 
+                    </NavLink>
+                </li>
+                <li key={Math.random(10)}>
+                    <NavLink to='/admin/4' className="link" activeClassName="active-link">
+                        <img src={Home} alt="icon" className="icon" />
+                        Home 
+                    </NavLink>
+                </li><li key={Math.random(10)}>
+                    <NavLink to='/admin/5' className="link" activeClassName="active-link">
+                        <img src={Home} alt="icon" className="icon" />
+                        Home 
                     </NavLink>
                 </li>
         </ul>

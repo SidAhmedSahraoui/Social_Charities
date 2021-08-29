@@ -36,12 +36,12 @@ function App() {
           <Switch>
             <Route path='/admin'>
               <Sidebar />
-              <Switch>
+              <Switch>  
                 <Route exact path='/admin/home' component={Dash}/>
                 <Route exact path='/admin/requests' component={Offers}/>
                 <Route exact path='/admin/budget' component={Offers}/>
               </Switch>
-                
+              <Footer />
             </Route>
             <Route  path='/' >
               <Navbar />

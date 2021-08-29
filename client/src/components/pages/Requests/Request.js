@@ -3,6 +3,10 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Container, Form } from 'react-bootstrap';
 import useStyles from '../Auth/login-jss';
+import { styled } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
+import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 // Actions
 import { register, clearErrors } from '../../../redux/actions/authActions';
@@ -10,9 +14,12 @@ import { setAlert } from '../../../redux/actions/alertActions';
 
 // App layout components
 import Spinner from '../../layout/Spinner';
-
+import FormInput from './Form'
 // Utils
 import { WEBSITE_NAME } from '../../../utils/Data';
+const Input = styled('input')({
+  display: 'none',
+});
 
 const Request = (props) => {
   const {
@@ -29,14 +36,6 @@ const Request = (props) => {
   });
 
   const { category , offer } = req;
-
-
-  const onChangeCategory = (e) =>
-    setReq({ ...req , gender: parseInt(e.target.value) });
-
-    const onChangeOffer = (e) =>
-    setReq({ ...req , gender: parseInt(e.target.value) });
-
   
   useEffect(() => {
     if (error && error.length) {
@@ -79,43 +78,20 @@ const Request = (props) => {
             </h4>
             <Form className='form form-container' onSubmit={onSubmit}>
         
-              <Form.Group>
-                  <Form.Label className='subtitle'>Category</Form.Label>
-                  <Form.Control
-                    as='select'
-                    name='category'
-                    value={category}
-                    onChange={onChangeCategory}
-                  >
-                    <option defaultValue value={5}>
-                      Not defined
-                    </option>
-                    <option value={1}>Professor</option>
-                    <option value={2}>Administration staff</option>
-                    <option value={3}>ATS</option>
-                    <option value={4}>fad</option>
+                <FormInput />
 
-                  </Form.Control>
-                </Form.Group>
-
-                <Form.Group>
-                  <Form.Label className='subtitle'>Offer</Form.Label>
-                  <Form.Control
-                    as='select'
-                    name='offer'
-                    value={offer}
-                    onChange={onChangeOffer}
-                  >
-                    <option defaultValue value={5}>
-                      Not defined
-                    </option>
-                    <option value={1}>Professor</option>
-                    <option value={2}>Administration staff</option>
-                    <option value={3}>ATS</option>
-                    <option value={4}>fad</option>
-
-                  </Form.Control>
-                </Form.Group>
+                  <label htmlFor="contained-button-file">
+                    <Input accept="image/*" id="contained-button-file" multiple type="file" />
+                    <Button variant="contained" component="span">
+                      Upload
+                    </Button>
+                  </label>
+                  <label htmlFor="icon-button-file">
+                    <Input accept="image/*" id="icon-button-file" type="file" />
+                    <IconButton color="primary" aria-label="upload picture" component="span">
+                      <PhotoCamera />
+                    </IconButton>
+                  </label>
 
 
               <div className='links d-flex align-items-center justify-content-between mt-4'>

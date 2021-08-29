@@ -26,8 +26,7 @@ const Home = () => {
         <div className='row py-5 align-items-center'>
           <div className='col-12 col-lg-6 text-center text-lg-left'>
             <h1 className='title mx-auto mx-lg-0 '>
-                Social Services <br />
-                ESI SBA Platform <br /> for {' '}
+                Social Services <br /> Platform <br /> for {' '}
                 <TextLoop interval={1500} fade={true} 
                  className='red' children={["Teachers", "Academic staff", "ATS"]} />
                 <br />

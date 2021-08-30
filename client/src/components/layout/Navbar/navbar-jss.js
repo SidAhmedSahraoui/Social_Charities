@@ -11,6 +11,12 @@ const useStyles = createUseStyles({
       '& .link-primary': LINK_PRIMARY,
       '& .BUTTON_TRANSPARENT' :BUTTON_TRANSPARENT,
     },
+    '& .admin' : {
+      float : 'left',
+      display:'inline-flex',
+      marginLeft:'1100px',
+      marginTop:'10px'
+    },
     '& .navbar-toggler': {
       color: colors['text-gray-600'],
       border: 0,

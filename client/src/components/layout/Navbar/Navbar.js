@@ -169,8 +169,11 @@ const NavbarComponent = (props) => {
     const mapSateToProps = (state) => ({
       isAuthenticated: state.auth.isAuthenticated,
       user: state.auth.user,
+      loading: state.user.loading,
+
     });
     
     export default connect(mapSateToProps, { logout, loadUser, clearMessages })(
       NavbarComponent
     );
+  

@@ -1,16 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Container, Form, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 // Actions
 import { loadUserProfile } from '../../../redux/actions/userActions';
-import { sendMessage, clearErrors } from '../../../redux/actions/messageActions';
 import { setAlert } from '../../../redux/actions/alertActions';
 
 // App layout components
 import Spinner from '../../layout/Spinner';
-
+import Dash from '../Admin/Dash'
 // Utils
 import { WEBSITE_NAME } from '../../../utils/Data';
 
@@ -21,20 +20,15 @@ const Profile = (props) => {
     user,
     user_profile,
     loading,
-    loading_send,
     error_send,
     loadUserProfile,
-    sendMessage,
     clearErrors,
     setAlert,
   } = props;
-  const { _id, name, username, bio, allow_messages } =
+  const { name, username, bio } =
     user_profile || {};
 
-  const [message, setMessage] = useState('');
-  const [is_sent, setIsSent] = useState(false);
 
-  const onChange = (e) => setMessage(e.target.value);
 
   useEffect(() => {
     loadUserProfile(match.params.username);
@@ -64,20 +58,7 @@ const Profile = (props) => {
     // eslint-disable-next-line
   }, [error_send]);
 
-  const onSubmit = async (e) => {
-    e.preventDefault();
-
-    if (message === '') {
-      setAlert('Message cannot be empty', 'danger');
-      return;
-    }
-
-    await sendMessage({ user_id: _id, content: message });
-
-    if (!error_send) {
-      setIsSent(true);
-    }
-  };
+ 
  
 
   return (
@@ -91,10 +72,9 @@ const Profile = (props) => {
         <div className='container-inner px-3 mt-4 text-center'>
           {loading ? (
             <Spinner />
-          ) : !user_profile ? (
-            <div className='not-found mx-auto'>
-              <h1 className='title'>404</h1>
-              <h5 className='subtitle'>This page does not exist!</h5>
+          ) :  !user || user._id === '612caa1f31cb9a33a0193de2' ? (
+            <div>
+              <Dash /> 
             </div>
           ) : (
             <div className='profile mx-auto'>
@@ -106,48 +86,7 @@ const Profile = (props) => {
                   Position : { bio }
                 </p>
                 
-              </div>
-
-              {!user || user._id !== _id ? (
-                allow_messages ? (
-                  <Form
-                    className='form form-container mt-4'
-                    onSubmit={onSubmit}
-                  >
-                    <Form.Group>
-                      <Form.Label>Your message</Form.Label>
-                      <Form.Control
-                        as='textarea'
-                        rows='3'
-                        name='message'
-                        value={message}
-                        onChange={onChange}
-                        disabled={is_sent}
-                      />
-                    </Form.Group>
-
-                    <div className='links d-flex align-items-center justify-content-center mt-4'>
-                      {loading_send ? (
-                        <Spinner />
-                      ) : is_sent ? (
-                        <div className='message-sent'>Message sent!</div>
-                      ) : (
-                        <Button variant='primary' type='submit'>
-                          Send
-                        </Button>
-                      )}
-                    </div>
-                  </Form>
-                ) : (
-                  <div className='mt-4'>
-                    <h6>Receiving messages is disabled</h6>
-                  </div>
-                )
-              ) : (
-                <div className='share mt-5'>
-                  
-                </div>
-              )}
+              </div>   
             </div>
           )}
         </div>
@@ -160,13 +99,9 @@ const mapSateToProps = (state) => ({
   user: state.auth.user,
   user_profile: state.user.user_profile,
   loading: state.user.loading,
-  loading_send: state.message.loading_send,
-  error_send: state.message.error_send,
 });
 
 export default connect(mapSateToProps, {
   loadUserProfile,
-  sendMessage,
-  clearErrors,
   setAlert,
 })(Profile);

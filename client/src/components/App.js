@@ -9,6 +9,7 @@ import store from '../redux/store';
 import Navbar from './layout/Navbar/Navbar';
 import Alert from './layout/Alert';
 import Footer from './layout/Footer/Footer';
+import AdminNav from './pages/Admin/adminNav';
 // App pages
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
@@ -22,27 +23,24 @@ import Hea from './pages/Offers/description/Hea';
 import Soc from './pages/Offers/description/Soc';
 import Sol from './pages/Offers/description/Sol';
 import Oth from './pages/Offers/description/Oth';
-import Sidebar from './pages/Sidebar/Sidebar'
 import Dash from './pages/Admin/Dash'
 // Routes
 import  PrivateRoute  from './routes/PrivateRoute';
-import  AdminRoute from './routes/AdminRoute';
 function App() {
   return (
     <Router>
       <Provider store={store}>
         <div className='app'>
           <Switch>
-            <Route path='/admin'>
-              <Sidebar />
-              <Switch>  
-                <AdminRoute exact path='/admin/home' component={Dash}/>
-                <Route exact path='/admin/requests' component={Offers}/>
-                <Route exact path='/admin/budget' component={Offers}/>
-              </Switch>
-              <Footer />
-            </Route>
-            <Route  path='/' >
+          <Route  path='/u/admin' >
+            <AdminNav  />
+            <Alert />
+                <Route  path='/u/admin' component={Dash} />
+                <Route exact path='/u/admin/home' component={Footer} />
+                <Route exact path='/u/admin/requests' component={Footer}/>
+                <Route exact path='/u/admin/budget' component={Footer}/>
+          </Route>
+          <Route  path='/' >
               <Navbar />
               <Alert />
               <Switch>

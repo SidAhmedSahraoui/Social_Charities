@@ -13,7 +13,6 @@ import Footer from './layout/Footer/Footer';
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import Profile from './pages/Dropdown/Profile';
-import Messages from './pages/Dropdown/Messages';
 import Settings from './pages/Dropdown/Settings';
 import NotFound from './pages/NotFound'
 import Home from './pages/Home/Home';
@@ -26,8 +25,8 @@ import Oth from './pages/Offers/description/Oth';
 import Sidebar from './pages/Sidebar/Sidebar'
 import Dash from './pages/Admin/Dash'
 // Routes
-import PrivateRoute from './routes/PrivateRoute';
-
+import  PrivateRoute  from './routes/PrivateRoute';
+import  AdminRoute from './routes/AdminRoute';
 function App() {
   return (
     <Router>
@@ -37,7 +36,7 @@ function App() {
             <Route path='/admin'>
               <Sidebar />
               <Switch>  
-                <Route exact path='/admin/home' component={Dash}/>
+                <AdminRoute exact path='/admin/home' component={Dash}/>
                 <Route exact path='/admin/requests' component={Offers}/>
                 <Route exact path='/admin/budget' component={Offers}/>
               </Switch>
@@ -50,7 +49,6 @@ function App() {
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/register' component={Register} />
                 <Route exact path='/u/:username' component={Profile} />
-                <PrivateRoute exact path='/messages' component={Messages} />
                 <PrivateRoute exact path='/settings' component={Settings} />
                 <PrivateRoute exact path='/requests' component={Requests} />
                 <Route exact path='/' component={Home} />

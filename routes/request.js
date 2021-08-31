@@ -1,34 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const config = require('config');
-const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator');
 
-const User = require('../models/User');
+const Request = require('../models/Request');
 
-//  @route       GET api/auth
-//  @desc        Get logged in user
-//  @access      Private
-router.get('/', auth, async (req, res) => {
-  try {
-    const user = await User.findById(req.user.id).select('-password');
-    res.json(user);
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).send('Server Error');
-  }
-});
 
-//  @route       POST api/auth
-//  @desc        Auth and get Token
+//  @route       POST api/users
+//  @desc        Register a user
 //  @access      Public
 router.post(
   '/',
   [
-    check('username', 'Username is required').exists(),
-    check('password', 'Password is required').exists(),
+    check('email', 'Please include a valid email').isEmail(),
+    check('category', 'Category is required').not().isEmpty(),
+    check('offer', 'Offer is required').not().isEmpty(),
   ],
   async (req, res) => {
     const errors = validationResult(req);
@@ -36,26 +23,16 @@ router.post(
       return res.status(400).json(errors.array());
     }
 
-    const { username, password } = req.body;
+    const {name , email, category , offer } = req.body;
 
-    try {
-      let user = await User.findOne({
-        $or: [{ email: username }, { username: username }],
-      });
+      request = new Request({ name , email , category , offer });
+      
 
-      if (!user) {
-        return res.status(400).json([{ msg: 'Invalid Credentials' }]);
-      }
-
-      const isMatch = await bcrypt.compare(password, user.password);
-
-      if (!isMatch) {
-        return res.status(400).json([{ msg: 'Invalid Credentials' }]);
-      }
+      await user.save();
 
       const payload = {
-        user: {
-          id: user.id,
+        request: {
+          id: request.id,
         },
       };
 
@@ -70,11 +47,10 @@ router.post(
           res.json({ token });
         }
       );
-    } catch (error) {
-      console.error(error.message);
-      res.status(500).send('Server Error');
-    }
   }
 );
+
+ 
+
 
 module.exports = router;

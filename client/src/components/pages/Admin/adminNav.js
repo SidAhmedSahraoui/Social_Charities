@@ -89,8 +89,7 @@ const AdminNav = (props) => {
               aria-controls='navbarSupportedContent'
               aria-expanded='false'
               aria-label='Toggle navigation'
-              onClick={handleToggle}
-            >
+              onClick={handleToggle} >
               <FontAwesomeIcon
                 style={
                   toggleStatus !== 'closed' && {

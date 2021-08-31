@@ -1,17 +1,16 @@
 import React from 'react'
-import { NavLink , Link } from 'react-router-dom'
+import { NavLink  } from 'react-router-dom'
 //import Logo from '../../../assets/icons/sidebar_logo.png'
 import './Sidebar.css'
 import Coin from '../../../images/coin-stack.png'
 import Home from '../../../images/home-icon.png'
 import Tick from '../../../images/tick-icon.png'
-import Logo from '../../../images/logo.png'
 export default function sidebar(props){
     return(
      <div className="sidebar-container">
         <ul>
                 <li key={Math.random(10)}>
-                    <NavLink to='/u/admin/home' className="link" activeClassName="active-link">
+                    <NavLink exact to='/u/admin' className="link" activeClassName="active-link">
                         <img src={Home} alt="icon" className="icon" />
                         Home 
                     </NavLink>

@@ -35,10 +35,10 @@ function App() {
           <Route  path='/u/admin' >
             <Alert />
                 <Navbar />
-                <Route  path='/u/admin' component={Dash} />
-                <Route exact path='/u/admin/home' component={Footer} />
-                <Route exact path='/u/admin/requests' component={Footer}/>
-                <Route exact path='/u/admin/budget' component={Footer}/>
+                <PrivateRoute  path='/u/admin' component={Dash} />
+                <PrivateRoute exact path='/u/admin/home' component={Footer} />
+                <PrivateRoute exact path='/u/admin/requests' component={Footer}/>
+                <PrivateRoute exact path='/u/admin/budget' component={Footer}/>
                 <Footer />
           </Route>
           <Route  path='/' >

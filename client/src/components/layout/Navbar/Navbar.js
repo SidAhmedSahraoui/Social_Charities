@@ -75,7 +75,7 @@ const NavbarComponent = (props) => {
                   icon={faEnvelope}
                   size='lg'
                 />
-                Messages
+                Notifications
               </Link>
               <Link to='/settings' className='dropdown-item'>
                 <FontAwesomeIcon className='icon mr-3' icon={faCog} size='lg' />

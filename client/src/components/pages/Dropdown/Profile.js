@@ -9,7 +9,6 @@ import { setAlert } from '../../../redux/actions/alertActions';
 
 // App layout components
 import Spinner from '../../layout/Spinner';
-import Dash from '../Admin/Dash'
 // Utils
 import { WEBSITE_NAME } from '../../../utils/Data';
 
@@ -70,16 +69,9 @@ const Profile = (props) => {
       </Helmet>
       <Container>
         <div className='container-inner px-3 mt-4 text-center'>
-          {loading ? (
-            <Spinner />
-          ) :  !user || user._id === '612caa1f31cb9a33a0193de2' ? (
-            <div>
-              <Dash /> 
-            </div>
-          ) : (
+          {loading ? 
+            <Spinner />  : 
             <div className='profile mx-auto'>
-              
-
               <div className='user-details mt-4'>
                 <h3 className='name'>{name || username}</h3>
                 <p className='title'>
@@ -88,10 +80,10 @@ const Profile = (props) => {
                 
               </div>   
             </div>
-          )}
+          }
         </div>
       </Container>
-    </>
+    </> 
   );
 };
 

@@ -23,6 +23,7 @@ const Input = styled('input')({
 
 const Request = (props) => {
   const {
+    isAuthenticated,
     error,
     loading,
     request,
@@ -31,12 +32,18 @@ const Request = (props) => {
   } = props;
 
   const [req, setReq] = useState({
+    name : '',
+    email : '',
     category: '',
     offer: '',
   });
 
-  const { category , offer } = req;
+  const { name , email , category , offer } = req;
+
+  const onChange = (e) => setReq({ ...req, [e.target.name]: e.target.value });
+
   
+
   useEffect(() => {
     if (error && error.length) {
       if (typeof error === 'object') {
@@ -59,7 +66,7 @@ const Request = (props) => {
     if (category === '' || offer === '' ) {
       setAlert('Please enter all fields', 'danger');
     } else {
-      await request({ category , offer });
+      await request({ name , email , category , offer });
     }
   };
 
@@ -79,19 +86,6 @@ const Request = (props) => {
             <Form className='form form-container' onSubmit={onSubmit}>
         
                 <FormInput />
-
-                  <label htmlFor="contained-button-file">
-                    <Input accept="image/*" id="contained-button-file" multiple type="file" />
-                    <Button variant="contained" component="span">
-                      Upload
-                    </Button>
-                  </label>
-                  <label htmlFor="icon-button-file">
-                    <Input accept="image/*" id="icon-button-file" type="file" />
-                    <IconButton color="primary" aria-label="upload picture" component="span">
-                      <PhotoCamera />
-                    </IconButton>
-                  </label>
 
 
               <div className='links d-flex align-items-center justify-content-between mt-4'>

@@ -72,14 +72,14 @@ router.post(
 //  @desc        Update a user
 //  @access      Private
 router.put('/', auth, async (req, res) => {
-  const { allow_messages, name, bio, gender } = req.body;
+  const { allow_messages, name, post, gender } = req.body;
 
   // New user object
   const new_user = {};
 
   if (allow_messages !== null) new_user.allow_messages = allow_messages;
   if (name !== null) new_user.name = name;
-  if (bio !== null) new_user.bio = bio;
+  if (post !== null) new_user.post = post;
   if (gender) new_user.gender = gender;
 
   try {

@@ -35,7 +35,7 @@ const Settings = (props) => {
     username: '',
     email: '',
     name: '',
-    bio: '',
+    post: '',
     gender: 0,
     allow_messages: false,
   });
@@ -46,7 +46,7 @@ const Settings = (props) => {
     //eslint-disable-next-line
   }, []);
 
-  const { username, email, name, bio, gender, allow_messages } = userData;
+  const { username, email, name, post, gender, allow_messages } = userData;
 
   const [passwords, setPasswords] = useState({
     old_password: '',
@@ -62,7 +62,7 @@ const Settings = (props) => {
     setUserData({ ...userData, gender: parseInt(e.target.value) });
 
   const onChangePosition = (e) =>
-    setUserData({ ...userData, bio: e.target.value });
+    setUserData({ ...userData, post: e.target.value });
 
   const onChangeAllowMessages = (e) =>
     setUserData({
@@ -103,7 +103,7 @@ const Settings = (props) => {
     await updateProfile({
       allow_messages,
       name,
-      bio,
+      post,
       gender,
     });
   };
@@ -183,8 +183,8 @@ const Settings = (props) => {
                   <Form.Label className='subtitle'>Position</Form.Label>
                   <Form.Control
                     as='select'
-                    name='bio'
-                    value={bio}
+                    name='post'
+                    value={post}
                     onChange={onChangePosition}
                   >
                     <option defaultValue value={4}>

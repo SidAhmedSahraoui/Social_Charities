@@ -25,7 +25,7 @@ const Profile = (props) => {
     clearErrors,
     setAlert,
   } = props;
-  const { name, username, bio } =
+  const { name, username, post } =
     user_profile || {};
 
 
@@ -83,7 +83,7 @@ const Profile = (props) => {
               <div className='user-details mt-4'>
                 <h3 className='name'>{name || username}</h3>
                 <p className='title'>
-                  Position : { bio }
+                  Position : { post }
                 </p>
                 
               </div>   

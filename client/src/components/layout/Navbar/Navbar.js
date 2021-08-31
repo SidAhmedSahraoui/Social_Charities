@@ -12,6 +12,8 @@ import {
   faCog,
 } from '@fortawesome/free-solid-svg-icons';
 
+import AdminNav from '../../pages/Admin/adminNav';
+
 // Actions
 import { logout, loadUser } from '../../../redux/actions/authActions';
 import { clearMessages } from '../../../redux/actions/messageActions';
@@ -41,6 +43,7 @@ const NavbarComponent = (props) => {
     clearMessages();
   };
     
+      const adminMenu = (<div> <AdminNav /> </div>);
       const guestMenu = (
         <>
           <Link to='/login'>
@@ -106,6 +109,70 @@ const NavbarComponent = (props) => {
 
 
     return (
+
+      
+        !isAuthenticated ? 
+          <nav
+          className={`${classes.navbar} navbar navbar-expand-lg navbar-light `}
+        >
+          <div className='container'>
+            <Link className='navbar-brand' to='/'>
+              <img className='logo' src={Logo} alt='esisoc' />
+            </Link>
+            <button
+              className='navbar-toggler'
+              type='button'
+              data-toggle='collapse'
+              data-target='#navbarSupportedContent'
+              aria-controls='navbarSupportedContent'
+              aria-expanded='false'
+              aria-label='Toggle navigation'
+              onClick={handleToggle}
+            >
+              <FontAwesomeIcon
+                style={
+                  toggleStatus !== 'closed' && {
+                    transformOrigin: 'center',
+                    transform: 'rotate(90deg)',
+                  }
+                }
+                icon={faGripLines}
+              />
+            </button>
+    
+            <div className='collapse navbar-collapse' id='navbarSupportedContent'>
+              <ul className='navbar-nav mr-auto'>
+                <li className='BUTTON_TRANSPARENT'>
+                  <Link className='nav-link' to='/requests'>
+                    Requests
+                  </Link>
+                </li>
+
+                <li className='BUTTON_TRANSPARENT'>
+                  <Link className='nav-link' to='/offers'>
+                    Offers
+                  </Link>
+                </li>
+
+                <li className='BUTTON_TRANSPARENT'>
+                  <Link className='nav-link' to='/contact'>
+                    Contact
+                  </Link>
+                </li>
+
+              </ul>
+    
+              
+              <ul className='navbar-nav'>
+                {guestMenu}           
+               </ul>
+            </div>
+          </div>
+        </nav> :       
+        
+              ( user && user.username !== 'admin'  ?
+
+        
         <nav
           className={`${classes.navbar} navbar navbar-expand-lg navbar-light `}
         >
@@ -158,12 +225,13 @@ const NavbarComponent = (props) => {
     
               
               <ul className='navbar-nav'>
-              {isAuthenticated ? userMenu : guestMenu}             
+                {userMenu}           
                </ul>
             </div>
           </div>
-        </nav>
-      );
+        </nav>  :  adminMenu )
+        
+        );   
     };
 
     const mapSateToProps = (state) => ({

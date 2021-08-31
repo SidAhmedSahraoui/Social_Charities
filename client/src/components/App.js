@@ -9,7 +9,7 @@ import store from '../redux/store';
 import Navbar from './layout/Navbar/Navbar';
 import Alert from './layout/Alert';
 import Footer from './layout/Footer/Footer';
-import AdminNav from './pages/Admin/adminNav';
+
 // App pages
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
@@ -33,12 +33,13 @@ function App() {
         <div className='app'>
           <Switch>
           <Route  path='/u/admin' >
-            <AdminNav  />
             <Alert />
+                <Navbar />
                 <Route  path='/u/admin' component={Dash} />
                 <Route exact path='/u/admin/home' component={Footer} />
                 <Route exact path='/u/admin/requests' component={Footer}/>
                 <Route exact path='/u/admin/budget' component={Footer}/>
+                <Footer />
           </Route>
           <Route  path='/' >
               <Navbar />

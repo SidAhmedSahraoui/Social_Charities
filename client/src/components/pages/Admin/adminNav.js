@@ -1,16 +1,16 @@
-
 import React , { useState , useEffect } from 'react' ; 
 import { Link } from 'react-router-dom';
-import useStyles from '../../layout/Navbar/navbar-jss';
+import useStyles from './navbar-jss';
 import { connect } from 'react-redux';
 import { Dropdown } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser,
   faSignOutAlt,
-  faEnvelope,
+  faGripLines,
   faCog,
 } from '@fortawesome/free-solid-svg-icons';
+import Logo from '../../../images/logo.png'
 
 // Actions
 import { logout, loadUser } from '../../../redux/actions/authActions';
@@ -42,15 +42,7 @@ const AdminNav = (props) => {
                 className='dropdown-item'
               >
                 <FontAwesomeIcon className='icon mr-3' icon={faUser} size='lg' />
-                Profile
-              </Link>
-              <Link to='/messages' className='dropdown-item'>
-                <FontAwesomeIcon
-                  className='icon mr-3'
-                  icon={faEnvelope}
-                  size='lg'
-                />
-                Messages
+                Dashboard
               </Link>
               <Link to='/settings' className='dropdown-item'>
                 <FontAwesomeIcon className='icon mr-3' icon={faCog} size='lg' />
@@ -84,17 +76,35 @@ const AdminNav = (props) => {
 
 
     return (
-        <nav
-          className={`${classes.navbar} navbar navbar-expand-lg navbar-light `}
-        >
-          
-              
-    
-              
-              <ul className='admin'>
-              { userMenu }             
-               </ul>         
-        </nav>
+      <nav className={`${classes.navbar} navbar navbar-expand-lg navbar-light `}>
+          <div className='container'>
+            <Link className='navbar-brand' to='/'>
+              <img className='logo' src={Logo} alt='esisoc' />
+            </Link>
+            <button
+              className='navbar-toggler'
+              type='button'
+              data-toggle='collapse'
+              data-target='#navbarSupportedContent'
+              aria-controls='navbarSupportedContent'
+              aria-expanded='false'
+              aria-label='Toggle navigation'
+              onClick={handleToggle}
+            >
+              <FontAwesomeIcon
+                style={
+                  toggleStatus !== 'closed' && {
+                    transformOrigin: 'center',
+                    transform: 'rotate(90deg)',
+                  }
+                }
+                icon={faGripLines}
+              />
+            </button>
+
+              { userMenu }            
+    </div>
+    </nav>
       );
     };
 

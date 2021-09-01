@@ -14,12 +14,10 @@ import Logo from '../../../images/logo.png'
 
 // Actions
 import { logout, loadUser } from '../../../redux/actions/authActions';
-import { clearMessages } from '../../../redux/actions/messageActions';
-
 
 const AdminNav = (props) => {
 
-  const { user, logout, loadUser, clearMessages } = props;
+  const { user, logout, loadUser } = props;
   useEffect(() => {
     loadUser();
 
@@ -27,7 +25,6 @@ const AdminNav = (props) => {
   }, []);
   const logoutFunction = () => {
     logout();
-    clearMessages();
   };
       const userMenu = (
         <>
@@ -114,7 +111,7 @@ const AdminNav = (props) => {
 
     });
     
-    export default connect(mapSateToProps, { logout, loadUser, clearMessages })(
+    export default connect(mapSateToProps, { logout, loadUser })(
         AdminNav
     );
   

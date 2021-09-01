@@ -15,11 +15,11 @@ const useStyles = createUseStyles({
         textDecorationColor : 'black'
       },
       '& .title': {
-        color: '#0ca678',
+        color: '#2d3748',
       },
       '& .subtitle': {
         color: colors['text-gray-700'],
-        fontWeight: '400',
+        fontWeight: '900',
       },
       
       '& .button-primary': BUTTON_PRIMARY,

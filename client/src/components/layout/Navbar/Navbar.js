@@ -8,7 +8,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faUser,
   faSignOutAlt,
-  faEnvelope,
   faCog,
 } from '@fortawesome/free-solid-svg-icons';
 
@@ -16,7 +15,6 @@ import AdminNav from '../../pages/Admin/adminNav';
 
 // Actions
 import { logout, loadUser } from '../../../redux/actions/authActions';
-import { clearMessages } from '../../../redux/actions/messageActions';
 
 import {
   faGripLines,
@@ -32,7 +30,7 @@ import {
 
 const NavbarComponent = (props) => {
 
-  const { isAuthenticated, user, logout, loadUser, clearMessages } = props;
+  const { isAuthenticated, user, logout, loadUser } = props;
   useEffect(() => {
     loadUser();
 
@@ -40,7 +38,6 @@ const NavbarComponent = (props) => {
   }, []);
   const logoutFunction = () => {
     logout();
-    clearMessages();
   };
     
       const adminMenu = (<div> <AdminNav /> </div>);
@@ -69,14 +66,7 @@ const NavbarComponent = (props) => {
                 <FontAwesomeIcon className='icon mr-3' icon={faUser} size='lg' />
                 Profile
               </Link>
-              <Link to='/messages' className='dropdown-item'>
-                <FontAwesomeIcon
-                  className='icon mr-3'
-                  icon={faEnvelope}
-                  size='lg'
-                />
-                Notifications
-              </Link>
+              
               <Link to='/settings' className='dropdown-item'>
                 <FontAwesomeIcon className='icon mr-3' icon={faCog} size='lg' />
                 Settings
@@ -241,7 +231,7 @@ const NavbarComponent = (props) => {
 
     });
     
-    export default connect(mapSateToProps, { logout, loadUser, clearMessages })(
+    export default connect(mapSateToProps, { logout, loadUser })(
       NavbarComponent
     );
   

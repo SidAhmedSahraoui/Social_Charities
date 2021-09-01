@@ -6,7 +6,7 @@ import useStyles from '../Auth/login-jss';
 import { styled } from '@material-ui/core/styles';
 
 // Actions
-import { request, clearErrors } from '../../../redux/actions/authActions';
+import { request, clearErrors } from '../../../redux/actions/requestActions';
 import { setAlert } from '../../../redux/actions/alertActions';
 
 // App layout components

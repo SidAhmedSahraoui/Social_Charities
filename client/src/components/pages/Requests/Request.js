@@ -10,7 +10,7 @@ import { request, clearErrors } from '../../../redux/actions/requestActions';
 import { setAlert } from '../../../redux/actions/alertActions';
 
 // App layout components
-import Spinner from '../../layout/Spinner';
+import Spinner from '../../layout/Spinner/Spinner';
 import FormInput from './Form'
 // Utils
 import { WEBSITE_NAME } from '../../../utils/Data';

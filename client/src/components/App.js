@@ -5,12 +5,12 @@ import { Provider } from 'react-redux';
 // Redux store
 import store from '../redux/store';
 
-// App layout components
+// layout components
 import Navbar from './layout/Navbar/Navbar';
 import Alert from './layout/Alert';
 import Footer from './layout/Footer/Footer';
-
-// App pages
+import AdminNavbar from './layout/Dashboard/AdminNav'
+// pages
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import Profile from './pages/Dropdown/Profile';
@@ -23,25 +23,20 @@ import Hea from './pages/Offers/description/Hea';
 import Soc from './pages/Offers/description/Soc';
 import Sol from './pages/Offers/description/Sol';
 import Oth from './pages/Offers/description/Oth';
-import Dash from './pages/Admin/Dash'
+
 // Routes
 import  PrivateRoute  from './routes/PrivateRoute';
+import  AdminRoute  from './routes/AdminRoute';
 function App() {
   return (
     <Router>
       <Provider store={store}>
         <div className='app'>
           <Switch>
-          <Route  path='/u/admin' >
-            <Alert />
-                <Navbar />
-                <PrivateRoute  path='/u/admin' component={Dash} />
-                <PrivateRoute exact path='/u/admin/home' component={Footer} />
-                <PrivateRoute exact path='/u/admin/requests' component={Footer}/>
-                <PrivateRoute exact path='/u/admin/budget' component={Footer}/>
-                <Footer />
-          </Route>
-          <Route  path='/' >
+          <AdminRoute path='/' >
+            <AdminNavbar />
+          </AdminRoute>
+          <Route path='/' >
               <Navbar />
               <Alert />
               <Switch>

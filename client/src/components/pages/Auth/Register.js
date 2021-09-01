@@ -10,7 +10,7 @@ import { register, clearErrors } from '../../../redux/actions/authActions';
 import { setAlert } from '../../../redux/actions/alertActions';
 
 // App layout components
-import Spinner from '../../layout/Spinner';
+import Spinner from '../../layout/Spinner/Spinner';
 
 // Utils
 import { WEBSITE_NAME } from '../../../utils/Data';

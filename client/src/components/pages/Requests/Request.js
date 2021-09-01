@@ -4,12 +4,9 @@ import Helmet from 'react-helmet';
 import { Container, Form } from 'react-bootstrap';
 import useStyles from '../Auth/login-jss';
 import { styled } from '@material-ui/core/styles';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
 
 // Actions
-import { register, clearErrors } from '../../../redux/actions/authActions';
+import { request, clearErrors } from '../../../redux/actions/authActions';
 import { setAlert } from '../../../redux/actions/alertActions';
 
 // App layout components
@@ -23,7 +20,6 @@ const Input = styled('input')({
 
 const Request = (props) => {
   const {
-    isAuthenticated,
     error,
     loading,
     request,
@@ -87,7 +83,6 @@ const Request = (props) => {
         
                 <FormInput />
 
-
               <div className='links d-flex align-items-center justify-content-between mt-4'>
                 
                 {loading ? (
@@ -108,10 +103,9 @@ const Request = (props) => {
 
 const mapSateToProps = (state) => ({
   error: state.auth.error,
-  isAuthenticated: state.auth.isAuthenticated,
   loading: state.auth.loading,
 });
 
-export default connect(mapSateToProps, { register, clearErrors, setAlert })(
+export default connect(mapSateToProps, { request, clearErrors, setAlert })(
   Request
 );

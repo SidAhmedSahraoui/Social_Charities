@@ -3,7 +3,7 @@ const router = express.Router();
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const { check, validationResult } = require('express-validator');
-
+const auth = require('../middleware/auth')
 const Request = require('../models/Request');
 
 
@@ -11,7 +11,7 @@ const Request = require('../models/Request');
 //  @desc        Register a user
 //  @access      Public
 router.post(
-  '/',
+  '/',auth,
   [
     check('email', 'Please include a valid email').isEmail(),
     check('category', 'Category is required').not().isEmpty(),
@@ -28,7 +28,7 @@ router.post(
       request = new Request({ name , email , category , offer });
       
 
-      await user.save();
+      await request.save();
 
       const payload = {
         request: {
@@ -49,8 +49,4 @@ router.post(
       );
   }
 );
-
- 
-
-
 module.exports = router;

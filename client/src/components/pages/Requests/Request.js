@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Container, Form } from 'react-bootstrap';
+import { Container, Form, Button } from 'react-bootstrap';
 import useStyles from '../Auth/login-jss';
 import { styled } from '@material-ui/core/styles';
 
@@ -14,9 +14,7 @@ import Spinner from '../../layout/Spinner/Spinner';
 import FormInput from './Form'
 // Utils
 import { WEBSITE_NAME } from '../../../utils/Data';
-const Input = styled('input')({
-  display: 'none',
-});
+
 
 const Request = (props) => {
   const {
@@ -28,13 +26,16 @@ const Request = (props) => {
   } = props;
 
   const [req, setReq] = useState({
-    name : '',
-    email : '',
+    email: '',
+    name:'',
     category: '',
     offer: '',
   });
 
-  const { name , email , category , offer } = req;
+  const { name, email, category, offer } = req;
+
+
+
 
   const onChange = (e) => setReq({ ...req, [e.target.name]: e.target.value });
 
@@ -59,7 +60,7 @@ const Request = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (category === '' || offer === '' ) {
+    if (category === '' || offer === '' || email === '' || name === '' ) {
       setAlert('Please enter all fields', 'danger');
     } else {
       await request({ name , email , category , offer });
@@ -79,20 +80,69 @@ const Request = (props) => {
             <h4 className='mb-3 text-center '>
               <strong className='title' >Add a request</strong>
             </h4>
-            <Form className='form form-container' onSubmit={onSubmit}>
         
-                <FormInput />
+               
+               
+            <Form className='form form-container' onSubmit={onSubmit}>
+              <Form.Group>
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type='email'
+                  placeholder='Email'
+                  name='email'
+                  value={email}
+                  onChange={onChange}
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label>Name</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='Full Name'
+                  name='name'
+                  value={name}
+                  onChange={onChange}
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label>category</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='category'
+                  name='category'
+                  value={category}
+                  onChange={onChange}
+                />
+              </Form.Group>
+
+              <Form.Group>
+                <Form.Label>offer</Form.Label>
+                <Form.Control
+                  type='text'
+                  placeholder='offer'
+                  name='offer'
+                  value={offer}
+                  onChange={onChange}
+                />
+              </Form.Group>
 
               <div className='links d-flex align-items-center justify-content-between mt-4'>
                 
                 {loading ? (
                   <Spinner />
                 ) : (
-                  <button className='button-primary' type='submit' onClick={onSubmit}>
-                    Add
-                  </button>
+                  <Button variant='primary' type='submit'>
+                    SEND
+                  </Button>
                 )}
               </div>
+         
+
+
+
+
             </Form>
           </div>
         </div>
@@ -109,3 +159,4 @@ const mapSateToProps = (state) => ({
 export default connect(mapSateToProps, { request, clearErrors, setAlert })(
   Request
 );
+

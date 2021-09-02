@@ -139,7 +139,7 @@ const Navbar = (props) => {
         <div className='collapse navbar-collapse' id='navbarSupportedContent'>
           <ul className='navbar-nav mr-auto'>
             <li className='nav-item'>
-              <Link className='nav-link' to='/requests'>
+              <Link className='nav-link' to='/request'>
                 Requests
               </Link>
             </li>
@@ -149,7 +149,7 @@ const Navbar = (props) => {
               </Link>
             </li>
             <li className='nav-item'>
-              <Link className='nav-link' to='/blood'>
+              <Link className='nav-link' to='/contact'>
                 Contact
               </Link>
             </li>

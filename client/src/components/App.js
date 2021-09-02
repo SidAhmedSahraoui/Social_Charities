@@ -18,7 +18,7 @@ import Settings from './pages/Dropdown/Settings';
 import NotFound from './pages/NotFound'
 import Home from './pages/Home/Home';
 import Offers from './pages/Offers/Offers';
-import Requests from './pages/Requests/Request';
+import Request from './pages/Requests/Request';
 import Hea from './pages/Offers/description/Hea';
 import Soc from './pages/Offers/description/Soc';
 import Sol from './pages/Offers/description/Sol';
@@ -27,24 +27,21 @@ import Oth from './pages/Offers/description/Oth';
 // Routes
 import  PrivateRoute  from './routes/PrivateRoute';
 import  AdminRoute  from './routes/AdminRoute';
+
 function App() {
   return (
     <Router>
       <Provider store={store}>
-        <div className='app'>
-          <Switch>
-          <AdminRoute path='/' >
-            <AdminNavbar />
-          </AdminRoute>
-          <Route path='/' >
-              <Navbar />
+        <div className='app'>            
+                <Route  path='/' component={Navbar} />
               <Alert />
               <Switch>
                 <Route exact path='/login' component={Login} />
                 <Route exact path='/register' component={Register} />
-                <Route exact path='/u/:username' component={Profile} />
+                <PrivateRoute exact path='/u/:username' component={Profile} />
                 <PrivateRoute exact path='/settings' component={Settings} />
-                <PrivateRoute exact path='/requests' component={Requests} />
+                <PrivateRoute exact  path='/request' component={Request} />
+                <AdminRoute exact path='/pending' component={AdminNavbar}  />
                 <Route exact path='/' component={Home} />
                 <Route exact path='/offers' component={Offers} />
                 <Route exact path='/offers/hea' component={Hea} />
@@ -54,9 +51,7 @@ function App() {
                 <Route exact path='/404' component={NotFound} />
                 <Route component={NotFound} />
               </Switch>
-              <Footer />
-            </Route>
-          </Switch>
+              <Route path='/' component={Footer} />
         </div>
       </Provider>
     </Router>

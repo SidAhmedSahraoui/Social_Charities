@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 
 const RequestSchema = mongoose.Schema({
-  user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'users',
-      },
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
   category: {
     type: String,
     required: true,
@@ -13,13 +17,10 @@ const RequestSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  description : {
-    type: String ,
-    required: false 
-  },
+  
   request_accept: {
     type: Boolean,
-    required: true,
+    required: false,
   },
   
 });

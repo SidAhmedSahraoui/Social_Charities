@@ -51,13 +51,13 @@ const AdminNavbar = (props) => {
           <FontAwesomeIcon className='icon mr-3' icon={faUser} size='lg' />
           Profile
         </Link>
-        <Link to='/pending' className='dropdown-item'>
+        <Link to='/statistics' className='dropdown-item'>
           <FontAwesomeIcon
             className='icon mr-3'
             icon={faCheck}
             size='lg'
           />
-                Pending requests
+                statistics
               {/* <Link className='dropdown-item' to='/users'>
                     <FontAwesomeIcon className='icon mr-2' icon={faUsers} />
                     Manage Users

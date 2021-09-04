@@ -71,14 +71,14 @@ const Requests = (props) => {
     return (
       <>
         <Helmet>
-          <title>{`${WEBSITE_NAME} | Massages`}</title>
+          <title>{`${WEBSITE_NAME} | Pending`}</title>
         </Helmet>
         <Container>
           <div className='container-inner px-3 mt-4 text-center'>
             <div className='messages mx-auto'>
              
               <div className='user-details mt-4'>
-                <h3 className='title'>Your messages</h3>
+                <h3 className='title'>All requests</h3>
               </div>
   
               {loading ? (

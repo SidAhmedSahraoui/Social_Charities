@@ -15,7 +15,7 @@ const Footer = () => {
             <div className='footer my-4 text-center'>
               Crafted with {' '}
               <span role='img' aria-label='heart'>
-              💜
+              ❤️
               </span>{' '} By {' '}
               <a className='gh'
                 href='https://github.com/sidahmedsahraoui'

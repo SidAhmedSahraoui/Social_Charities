@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-solid-svg-icons';
+import { faSmile } from '@fortawesome/free-solid-svg-icons';
 import Skeleton from 'react-loading-skeleton';
-
+import useStyles from './Navbar/navbar-jss';
 // Utils
 import calcDays from '../../utils/calcDays';
 
@@ -21,8 +21,10 @@ const RequestCard = ({
   };
 
   const handleShow = () => {
-    handleShowModal(category);
+    handleShowModal(date);
   };
+
+  const classes = useStyles();
 
   if (isLoading)
     return (
@@ -42,26 +44,43 @@ const RequestCard = ({
     );
 
   return (
-    <div className='message-card text-left p-4'>
-      <div className='fav-container py-2 px-2' onClick={toggleFav}>
-        <FontAwesomeIcon
-          className={`icon ${isFav && 'is-fav'}`}
-          icon={faHeart}
-        />
-      </div>
-      <div className='card-inner d-flex flex-column justify-content-between'>
-        <p className='content mb-3'>
-          {category.length > 50 ? category.substring(0, 50) + '..' : category}
-        </p>
-        <p> { offer }</p>         <p> { name }</p>         <p> { email }</p>
-        <div className='card-bottom d-flex align-items-center justify-content-between'>
-          <button className='link-secondary' onClick={handleShow}>
-            View Request
-          </button>
-          <span className='date'>{calcDays(date)}</span>
+    <div className={`${classes.navbar}`}>
+        <div className='message-card text-left p-4'>
+          <div className='fav-container py-2 px-2' onClick={toggleFav}>
+            <FontAwesomeIcon
+              className={`icon ${isFav && 'is-fav'}`}
+              icon={faSmile}
+            />
+          </div>
+          <div className='card-inner d-flex flex-column justify-content-between'>
+            <p className='content mb-3'>
+              {name}
+            </p>
+            <p className='content mb-3'>
+              {email}
+            </p>
+            <p className='content mb-3'>
+              <strong className='link-secondary'> category : </strong> {' '} {category}
+            </p>
+
+            <p className='content mb-3'>
+               <strong className='link-secondary'> offer : </strong> {' '} {offer}
+            </p>
+
+
+            {/*<p className='content mb-3'>
+              {category.length > 50 ? category.substring(0, 50) + '..' : category}
+               </p> */}     
+            <div className='card-bottom d-flex align-items-center justify-content-between'>
+              <button className='button-primary' onClick={handleShow}>
+                View Request
+              </button>
+              <span className='date'>{calcDays(date)}</span>
+            </div>
+          </div>
         </div>
-      </div>
     </div>
+    
   );
 };
 

@@ -5,47 +5,54 @@ import {
     GET_REQUESTS,
     GET_REQUESTS_ERROR,
     CLEAR_REQUESTS,
+    TOGGLE_FAV_ERROR,
     CLEAR_ERRORS,
         } from '../types';
   
-  const initialState = {
-    loading: true,
-    request: null,
-    error: null,
-  };
+  
+    const initialState = {
+      requests: null,
+      loading: false,
+      error: null,
+      error_fav: null,
+    };
+    
 
   export default (state = initialState, action) => {
     switch (action.type) {
+      
       case REQUEST_SUCCESS :
-
         return {
           ...state,
           ...action.payload,
           loading: false,
         };
 
-      case CLEAR_REQUESTS:
-        return {
-        ...state,
-        requests: null,
-      };
-      case CLEAR_ERRORS:
-        return {
-          ...state,
-          error: null,
-          error_send: null,
-        };
-        case REQUEST_FAIL:
 
+      case REQUEST_FAIL:
         return {
         ...state,
         loading: false,
         request: null,
         error: action.payload || null,
         };
+      
+      
+      case CLEAR_REQUESTS:
+        return {
+        ...state,
+        requests: null,
+      };
 
-        case GET_REQUESTS :
+
+      case CLEAR_ERRORS:
+        return {
+          ...state,
+          error: null,
+        };
         
+
+      case GET_REQUESTS :
         return {
         ...state,
         error: false,
@@ -53,21 +60,31 @@ import {
         requests: action.payload,
       };
       
+
       case GET_REQUESTS_ERROR:
-      
-      return {
+        return {
         ...state,
         error: action.payload,
         loading: false,
       };
 
-      case SET_LOADING_REQUESTS:
-      
+
+    case SET_LOADING_REQUESTS:
       return {
         ...state,
         loading: true,
       };
+
+
+    case TOGGLE_FAV_ERROR:
+      return {
+          ...state,
+          error_fav: action.payload,
+        };
+
+
         default:
         return state;
   }
 };
+

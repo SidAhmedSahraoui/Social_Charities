@@ -22,6 +22,10 @@ const RequestSchema = mongoose.Schema({
     type: Boolean,
     required: false,
   },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
   
 });
 

@@ -8,6 +8,7 @@ import {
   CLEAR_ERRORS,
   REQUEST_SUCCESS,
   REQUEST_FAIL,
+  TOGGLE_FAV_ERROR,
 } from '../types';
 
 
@@ -26,7 +27,7 @@ export const request = (formData) => async (dispatch) => {
 
   try {
 
-    const res = await axios.post('/api/request', formData, config);
+    const res = await axios.post('/api/request/', formData, config);
 
     dispatch({
       type: REQUEST_SUCCESS,
@@ -63,8 +64,20 @@ export const setLoadingRequests = () => {
   return { type: SET_LOADING_REQUESTS };
 };
 
+// Toggle request fav
+export const toggleFav = (id) => async (dispatch) => {
+  try {
+    await axios.put('/api/request/fav/' + id);
+  } catch (error) {
+    dispatch({
+      type: TOGGLE_FAV_ERROR,
+      payload: error.response?.data,
+    });
+  }
+};
 
-// Clear 
+
+// Clear requests
 export const clearRequests = () => {
   return { type: CLEAR_REQUESTS };
 };

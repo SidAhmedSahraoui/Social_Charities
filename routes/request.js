@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const config = require('config');
+const auth = require('../middleware/auth');
 const { check, validationResult } = require('express-validator');
-const auth = require('../middleware/auth')
 const Request = require('../models/Request');
 
 
@@ -25,7 +25,9 @@ router.post(
 
     const {name , email, category , offer } = req.body;
 
-      request = new Request({ name , email , category , offer });
+    const request_accept = false
+
+      request = new Request({ name , email , category , offer , request_accept  });
       
 
       await request.save();
@@ -56,7 +58,7 @@ router.post(
 router.get('/', auth, async (req, res) => {
   try {
     const requests = await Request.find().sort({
-      date: -1,
+      name: -1,
     });
     res.json(requests);
   } catch (error) {
@@ -64,4 +66,67 @@ router.get('/', auth, async (req, res) => {
     res.status(500).send('Server Error');
   }
 });
+
+//  @route       GET api/requests/fav
+//  @desc        Get admin fav requests
+//  @access      Private
+router.get('/fav', auth, async (req, res) => {
+  try {
+    const requests = await Request.find({
+      request_accept: true,
+    }).sort({
+      date: -1,
+    });
+    res.json(requests); 
+  } catch (error) {
+    console.log(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+
+ 
+
+//  @route       PUT api/requests/fav/:id
+//  @desc        Add/Remove request to/from fav
+//  @access      Private
+router.put('/fav/:id', auth, async (req, res) => {
+  try {
+    let request = await Request.findById(req.params.id);
+
+    if (!request) return res.status(404).json([{ msg: 'Message not found' }]);
+
+   
+
+    request = await Request.findByIdAndUpdate(
+      req.params.id,
+      { request_accept: !request_accept },
+      { new: true }
+    );
+
+    res.json(request);
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//  @route       DELETE api/requests/:id
+//  @desc        Delete request
+//  @access      Private
+router.delete('/:id', auth, async (req, res) => {
+  try {
+    let request = await Request.findById(req.params.id);
+
+    if (!request) return res.status(404).json([{ msg: 'Request not found' }]);
+
+    await Request.findByIdAndRemove(req.params.id);
+
+    res.json({ msg: 'Request removed' });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

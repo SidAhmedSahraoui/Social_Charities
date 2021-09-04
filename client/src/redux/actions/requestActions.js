@@ -1,17 +1,10 @@
 import axios from 'axios';
 
 import {
-  USER_LOADED,
-  SETTINGS_LOADED,
-  UPDATE_SETTINGS,
-  UPDATE_PASSWORD,
-  LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT,
-  SET_LOADING,
-  SET_LOADING_SETTINGS,
-  AUTH_ERROR,
-  SETTINGS_ERROR,
+  SET_LOADING_REQUESTS,
+  GET_REQUESTS,
+  GET_REQUESTS_ERROR,
+  CLEAR_REQUESTS,
   CLEAR_ERRORS,
   REQUEST_SUCCESS,
   REQUEST_FAIL,
@@ -21,10 +14,6 @@ import {
 // Clear errors
 export const clearErrors = () => {
   return { type: CLEAR_ERRORS };
-};
-// Set loading to true
-export const setLoading = () => {
-  return { type: SET_LOADING };
 };
 
 // Register Request
@@ -36,7 +25,6 @@ export const request = (formData) => async (dispatch) => {
   };
 
   try {
-    dispatch(setLoading());
 
     const res = await axios.post('/api/request', formData, config);
 
@@ -52,3 +40,32 @@ export const request = (formData) => async (dispatch) => {
     });
   }
 };
+
+// Get requests
+export const getRequests = () => async (dispatch) => {
+  try {
+    dispatch(setLoadingRequests());
+    const res = await axios.get('/api/request');
+
+    dispatch({
+      type: GET_REQUESTS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_REQUESTS_ERROR,
+      payload: error.response?.data,
+    });
+  }
+};
+// Set loading messages to true
+export const setLoadingRequests = () => {
+  return { type: SET_LOADING_REQUESTS };
+};
+
+
+// Clear 
+export const clearRequests = () => {
+  return { type: CLEAR_REQUESTS };
+};
+

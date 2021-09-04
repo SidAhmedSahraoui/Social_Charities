@@ -10,19 +10,19 @@ export default function sidebar(props){
      <div className="sidebar-container">
         <ul>
                 <li key={Math.random(10)}>
-                    <NavLink exact to='/u/admin' className="link" activeClassName="active-link">
+                    <NavLink exact to='/pending' className="link" activeClassName="active-link">
                         <img src={Home} alt="icon" className="icon" />
                         Home 
                     </NavLink>
                 </li>
                 <li key={Math.random(10)}>
-                    <NavLink to='/u/admin/requests' className="link" activeClassName="active-link">
+                    <NavLink to='/statistics' className="link" activeClassName="active-link">
                         <img src={Tick} alt="icon" className="icon" />
                         Requests 
                     </NavLink>
                 </li>
                 <li key={Math.random(10)}>
-                    <NavLink to='/u/admin/budget' className="link" activeClassName="active-link">
+                    <NavLink to='/budget' className="link" activeClassName="active-link">
                         <img src={Coin} alt="icon" className="icon" />
                         Budget 
                     </NavLink>

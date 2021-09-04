@@ -1,13 +1,13 @@
-@import 'themes/_variables';
+@import "themes/_variables";
 
 .alerts {
   .alert {
-    padding: '20px';
+    padding: "20px";
     font-weight: 500;
     color: #fff;
 
     &.success {
-      background-color: $secondary;
+      background-color: $success;
     }
 
     &.danger {

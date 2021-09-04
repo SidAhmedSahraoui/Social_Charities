@@ -9,7 +9,7 @@ import store from '../redux/store';
 import Navbar from './layout/Navbar/Navbar';
 import Alert from './layout/Alert';
 import Footer from './layout/Footer/Footer';
-import AdminNavbar from './layout/Dashboard/AdminNav'
+
 // pages
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
@@ -23,7 +23,8 @@ import Hea from './pages/Offers/description/Hea';
 import Soc from './pages/Offers/description/Soc';
 import Sol from './pages/Offers/description/Sol';
 import Oth from './pages/Offers/description/Oth';
-
+import Sidebar from './pages/Sidebar/Sidebar';
+import Pending from './pages/Dropdown/pending';
 // Routes
 import  PrivateRoute  from './routes/PrivateRoute';
 import  AdminRoute  from './routes/AdminRoute';
@@ -41,7 +42,10 @@ function App() {
                 <PrivateRoute exact path='/u/:username' component={Profile} />
                 <PrivateRoute exact path='/settings' component={Settings} />
                 <PrivateRoute exact  path='/request' component={Request} />
-                <AdminRoute exact path='/pending' component={AdminNavbar}  />
+                <AdminRoute exact path='/pending' component={Sidebar}  />
+                <AdminRoute exact path='/pending' component={Pending}  />
+                <AdminRoute exact path='/statistics' component={Sidebar}  />
+                <AdminRoute exact path='/budget' component={Sidebar}  />
                 <Route exact path='/' component={Home} />
                 <Route exact path='/offers' component={Offers} />
                 <Route exact path='/offers/hea' component={Hea} />

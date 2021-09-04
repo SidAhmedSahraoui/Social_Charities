@@ -1,10 +1,9 @@
 import { createUseStyles } from 'react-jss';
 import colors from '../../../Styles/Color';
-import {
-  BUTTON_PRIMARY,
-  INPUT_TEXT,
-  POSTITEM_CARD,
-} from '../../../Styles/Button';
+import {  BUTTON_PRIMARY,
+          INPUT_TEXT ,
+          POSTITEM_CARD } from '../../../Styles/Button';
+
 
 const useStyles = createUseStyles({
   page: {
@@ -18,7 +17,7 @@ const useStyles = createUseStyles({
     'box-shadow': '26px 26px 26px rgb(109,184,241, 0.16)',
     },
     '& .title': {
-      color: '#c2255c',
+      color: '#2d3748',
     },
 
 
@@ -35,8 +34,7 @@ const useStyles = createUseStyles({
       },
     },
 
-    '& .button-primary': BUTTON_PRIMARY,
-    
+    '& .button-primary': BUTTON_PRIMARY,    
 
     '& .input-select': {
       height: 'auto',

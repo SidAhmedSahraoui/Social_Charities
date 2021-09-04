@@ -16,7 +16,6 @@ import { WEBSITE_NAME } from '../../../utils/Data';
 const Profile = (props) => {
   const {
     match,
-    user,
     user_profile,
     loading,
     error_send,

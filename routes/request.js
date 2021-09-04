@@ -7,9 +7,9 @@ const auth = require('../middleware/auth')
 const Request = require('../models/Request');
 
 
-//  @route       POST api/users
-//  @desc        Register a user
-//  @access      Public
+//  @route       POST api/requests
+//  @desc        Register a request
+//  @access      Private
 router.post(
   '/',auth,
   [
@@ -49,4 +49,19 @@ router.post(
       );
   }
 );
+
+//  @route       GET api/requests
+//  @desc        Get admin requests
+//  @access      Private
+router.get('/', auth, async (req, res) => {
+  try {
+    const requests = await Request.find().sort({
+      date: -1,
+    });
+    res.json(requests);
+  } catch (error) {
+    console.log(error.request);
+    res.status(500).send('Server Error');
+  }
+});
 module.exports = router;

@@ -127,13 +127,6 @@
   font-size: 1.8rem;
 }
 
-.icon {
-  width: 2.8rem;
-  height: 2.8rem;
-  fill: var(--white-color);
-  transition: fill 0.2s ease;
-}
-
 .icon-green:hover {
   fill: var(--green-color);
 }

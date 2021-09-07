@@ -28,7 +28,7 @@ const Home = () => {
             <h1 className='title mx-auto mx-lg-0 '>
                 Social Services <br /> Platform <br /> for {' '}
                 <TextLoop interval={1500} fade={true} 
-                 className='red' children={["Teachers", "Academic staff", "ATS"]} />
+                 className='loop' children={["Teachers", "Academic staff", "ATS"]} />
                 <br />
             </h1>  
           </div>

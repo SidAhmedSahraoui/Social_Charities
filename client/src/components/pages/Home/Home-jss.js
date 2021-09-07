@@ -4,6 +4,9 @@ const Styles = createUseStyles({
   page: {
     padding: '0px 150px 0px 150px',
     marginBottom: '10px',
+    '& .loop': {
+    color: '#c2255c',
+    },
     '& h1.title': {
       color: '#2d3748',
       fontWeight: '700',

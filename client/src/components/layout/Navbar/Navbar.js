@@ -38,7 +38,10 @@ const Navbar = (props) => {
 
   const userMenu = (
     <>
-      <Dropdown alignRight>
+      {
+        user && user.username === 'admin' ? 
+
+        <Dropdown alignRight>
         <Dropdown.Toggle variant="outline-light">
           Hey, <strong>{user && user.username}</strong> 👋
         </Dropdown.Toggle>
@@ -74,6 +77,45 @@ const Navbar = (props) => {
           </button>
         </Dropdown.Menu>
       </Dropdown>
+
+      :
+      
+      <Dropdown alignRight>
+        <Dropdown.Toggle variant="outline-light">
+          Hey, <strong>{user && user.username}</strong> 👋
+        </Dropdown.Toggle>
+
+        <Dropdown.Menu>
+          <Link
+            to={`/u/${user ? user.username : ""}`}
+            className="dropdown-item"
+          >
+            <FontAwesomeIcon className="icon mr-3" icon={faUser} size="lg" />
+            Profile
+          </Link>
+          <Link to="/messages" className="dropdown-item">
+            <FontAwesomeIcon className="icon mr-3" icon={faCheck} size="lg" />
+            Messages
+            {/* <Link className='dropdown-item' to='/users'>
+                    <FontAwesomeIcon className='icon mr-2' icon={faUsers} />
+                    Manage Users
+                  </Link> */}
+          </Link>
+          <Link to="/settings" className="dropdown-item">
+            <FontAwesomeIcon className="icon mr-3" icon={faCog} size="lg" />
+            Settings
+          </Link>
+          <Dropdown.Divider></Dropdown.Divider>
+          <button onClick={() => onLogout()} className="dropdown-item">
+            <FontAwesomeIcon
+              className="icon mr-3"
+              icon={faSignOutAlt}
+              size="lg"
+            />
+            Logout
+          </button>
+        </Dropdown.Menu>
+      </Dropdown>  }
     </>
   );
 
@@ -141,11 +183,7 @@ const Navbar = (props) => {
                 Offers
               </Link>
             </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/programme">
-                Programme
-              </Link>
-            </li>
+            
             <li className="nav-item">
               <Link className="nav-link" to="/contact">
                 Contact

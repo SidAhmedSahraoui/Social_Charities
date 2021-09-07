@@ -75,11 +75,7 @@ const Requests = (props) => {
         <>
           <div className='container-inner text-center'>
             <div className='messages mx-auto'>
-             
-              <div className='user-details mt-4'>
                 <h3 className='title'>All requests</h3>
-              </div>
-  
               {loading ? (
                 <div className='cards-container mt-5'>
                   <RequestCard isLoading={true} />

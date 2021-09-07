@@ -3,6 +3,7 @@ import colors from '../../../Styles/Color';
 
 const useStyles = createUseStyles({
   footer: {
+    float : 'bottom' ,
     marginBottom: '30px',
     '& .social': {
       '& .icon': {

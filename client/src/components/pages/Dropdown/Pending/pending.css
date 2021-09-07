@@ -1,0 +1,14 @@
+.sid {
+  margin: 0px;
+  padding: 0px;
+  width: 20%;
+  float: left;
+  margin-bottom: 100%;
+}
+
+.req {
+  margin: 0px;
+  padding: 0px;
+  width: 80%;
+  float: right;
+}

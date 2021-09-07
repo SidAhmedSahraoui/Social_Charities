@@ -6,7 +6,7 @@ import { WEBSITE_NAME } from '../../../utils/Data';
 
 // Images
 import Home01 from '../../../images/logo avec script.png';
-import Work from '../../../images/home.jpg'
+import About from '../../../images/about.svg'
 import Online from '../../../images/online-order.svg';
 import Smart from '../../../images/smartphone.svg';
 import Settings from '../../../images/settings.svg';
@@ -113,7 +113,7 @@ const Home = () => {
           <div className='row align-items-center'>
             <div className='col-12 col-lg-6 text-center'>
               <h3 className=''>
-                <img className='img img-fluid' src={Work} alt='Home2' />
+                <img className='img img-fluid' src={About} alt='Home2' />
               </h3>
             </div>
             <div className='col-12 col-lg-6 text-center text-lg-left'>

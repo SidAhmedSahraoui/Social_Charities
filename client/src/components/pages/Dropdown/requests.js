@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Container } from 'react-bootstrap';
 
 // Actions
 import {
@@ -73,8 +72,8 @@ const Requests = (props) => {
         <Helmet>
           <title>{`${WEBSITE_NAME} | Pending`}</title>
         </Helmet>
-        <Container>
-          <div className='container-inner px-3 mt-4 text-center'>
+        <>
+          <div className='container-inner text-center'>
             <div className='messages mx-auto'>
              
               <div className='user-details mt-4'>
@@ -116,7 +115,7 @@ const Requests = (props) => {
             request={request}
             onHide={handleHideModal}
           />
-        </Container>
+        </>
       </>
     );
   };

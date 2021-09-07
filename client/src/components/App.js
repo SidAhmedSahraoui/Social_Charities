@@ -23,7 +23,8 @@ import Hea from './pages/Offers/description/Hea';
 import Soc from './pages/Offers/description/Soc';
 import Sol from './pages/Offers/description/Sol';
 import Oth from './pages/Offers/description/Oth';
-import Requests from './pages/Dropdown/requests';
+import Pending from './pages/Dropdown/Pending/pending';
+import Budget from './pages/Dropdown/Budget/budget';
 // Routes
 import  PrivateRoute  from './routes/PrivateRoute';
 import  AdminRoute  from './routes/AdminRoute';
@@ -41,9 +42,9 @@ function App() {
                 <PrivateRoute exact path='/u/:username' component={Profile} />
                 <PrivateRoute exact path='/settings' component={Settings} />
                 <PrivateRoute exact  path='/request' component={Request} />
-                <AdminRoute exact path='/pending' component={Requests}  />
-                <AdminRoute exact path='/statistics' component={Requests}  />
-                <AdminRoute exact path='/budget' component={Requests}  />
+                <AdminRoute exact path='/pending' component={Pending}  />
+                <AdminRoute exact path='/statistics' component={Pending}  />
+                <AdminRoute exact path='/budget' component={Budget}  />
                 <Route exact path='/' component={Home} />
                 <Route exact path='/offers' component={Offers} />
                 <Route exact path='/offers/hea' component={Hea} />

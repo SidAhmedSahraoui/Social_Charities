@@ -1,31 +1,31 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Container } from 'react-bootstrap';
+import { Container, Form } from 'react-bootstrap';
 
 // Actions
 import { loadUserProfile } from '../../../redux/actions/userActions';
 import { setAlert } from '../../../redux/actions/alertActions';
 
-// App layout components
-import Spinner from '../../layout/Spinner/Spinner';
 // Utils
 import { WEBSITE_NAME } from '../../../utils/Data';
+
+// App layout components
+
 
 
 const Profile = (props) => {
   const {
     match,
-    user_profile,
+    user,
     loading,
     error_send,
     loadUserProfile,
     clearErrors,
     setAlert,
   } = props;
-  const { name, username, post } =
-    user_profile || {};
-
+  const { _id, name, username, post, email , gender } =
+    user || {};
 
 
   useEffect(() => {
@@ -56,8 +56,7 @@ const Profile = (props) => {
     // eslint-disable-next-line
   }, [error_send]);
 
- 
- 
+  
 
   return (
     <>
@@ -68,21 +67,49 @@ const Profile = (props) => {
       </Helmet>
       <Container>
         <div className='container-inner px-3 mt-4 text-center'>
-          {loading ? 
-            <Spinner />  : 
+            
             <div className='profile mx-auto'>
+              
+
               <div className='user-details mt-4'>
                 <h3 className='name'>{name || username}</h3>
-                <p className='title'>
-                  Position : { post }
+                <p className='bio'>
+                  {'Post : ' + post }
+                </p>
+                <p className='bio'>
+                  {'email : ' + email }
+                </p>
+                <p className='bio'>
+                  {'gender : ' + gender === 1 ? 'male' : gender === 2 ?  'female' : 'undefined'}
+                </p>
+                <p className='bio'>
+                  {'_id : ' + _id }
                 </p>
                 
-              </div>   
+              </div>
+              
+                    <Form.Group>
+
+                    <div className='share mt-5'>
+                       <h6>All sent requests</h6>
+                       <p className='mt-2'>
+                    
+
+                      </p>
+                   </div>
+
+                    </Form.Group>
+
+                    <div className='links d-flex align-items-center justify-content-center mt-4'>
+                      
+                      
+                      
+                    </div>    
+                
             </div>
-          }
         </div>
       </Container>
-    </> 
+    </>
   );
 };
 

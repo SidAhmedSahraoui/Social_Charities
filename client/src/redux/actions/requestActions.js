@@ -59,7 +59,7 @@ export const getRequests = () => async (dispatch) => {
     });
   }
 };
-// Set loading messages to true
+// Set loading requests to true
 export const setLoadingRequests = () => {
   return { type: SET_LOADING_REQUESTS };
 };

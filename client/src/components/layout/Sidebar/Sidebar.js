@@ -5,7 +5,7 @@ import './Sidebar.css'
 import Coin from '../../../images/coin-stack.png'
 import Home from '../../../images/home-icon.png'
 import Tick from '../../../images/tick-icon.png'
-export default function sidebar(props){
+export default function sidebar(){
     return(
      <div className="sidebar-container">
         <ul>

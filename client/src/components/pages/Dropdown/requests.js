@@ -111,6 +111,7 @@ const Requests = (props) => {
           </div>
   
           <RequestModal
+            key={request._id}
             show={showModal}
             request={request}
             onHide={handleHideModal}

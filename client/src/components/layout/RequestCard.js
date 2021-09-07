@@ -12,16 +12,16 @@ const RequestCard = ({
   isLoading,
   handleShowModal,
 }) => {
-  const { is_fav, _id, name , email , category , offer , date } = request || {};
+  const {  _id, name , email , category , offer,request_accept , date } = request || {};
 
-  const [isFav, setIsFav] = useState(is_fav);
+  const [isFav, setIsFav] = useState(request_accept);
   const toggleFav = async () => {
     setIsFav(!isFav);
     await toggleFavAction(_id);
   };
 
   const handleShow = () => {
-    handleShowModal(date);
+    handleShowModal(request);
   };
 
   const classes = useStyles();
@@ -66,7 +66,9 @@ const RequestCard = ({
             <p className='content mb-3'>
                <strong className='link-secondary'> offer : </strong> {' '} {offer}
             </p>
-
+            <p className='content mb-3'>
+               <strong className='link-secondary'> acceptation : </strong> {' '} {request_accept}
+            </p>
 
             {/*<p className='content mb-3'>
               {category.length > 50 ? category.substring(0, 50) + '..' : category}

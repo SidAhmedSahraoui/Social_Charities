@@ -67,6 +67,21 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
+//  @route       GET api/requests
+//  @desc        Get user requests
+//  @access      Private
+router.get('/', auth, async (req, res) => {
+  try {
+    const requests = await Request.find({ request : req.user.id }).sort({
+      date: -1,
+    });
+    res.json(requests);
+  } catch (error) {
+    console.log(error.request);
+    res.status(500).send('Server Error');
+  }
+});
+
 //  @route       GET api/requests/fav
 //  @desc        Get admin fav requests
 //  @access      Private
@@ -84,8 +99,6 @@ router.get('/fav', auth, async (req, res) => {
   }
 });
 
-
- 
 
 //  @route       PUT api/requests/fav/:id
 //  @desc        Add/Remove request to/from fav

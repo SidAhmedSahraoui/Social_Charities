@@ -1,0 +1,16 @@
+.button_primary {
+  background: #f06595;
+  border: 0;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #fff !important;
+  padding: 8px 20px !important;
+}
+.button_secondary {
+  background: "#edf2f7";
+  border: 0;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #2d3748 !important;
+  padding: 8px 20px !important;
+}

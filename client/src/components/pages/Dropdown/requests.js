@@ -5,14 +5,17 @@ import Helmet from 'react-helmet';
 // Actions
 import {
   getRequests,
-  toggleFav,
+  approveRequest,
+  declineRequest,
   clearErrors,
 } from '../../../redux/actions/requestActions';
 import { setAlert } from '../../../redux/actions/alertActions';
 
 // App layout components
 import RequestCard from '../../layout/RequestCard';
-import RequestModal from '../../layout/RequestModal';
+// Components
+
+import useStyles from '../../layout/Navbar/navbar-jss';
 
 // Utils
 import { WEBSITE_NAME } from '../../../utils/Data';
@@ -20,29 +23,20 @@ import { WEBSITE_NAME } from '../../../utils/Data';
 
 
 const Requests = (props) => {
+  const classes = useStyles();
 
-
-    const [showModal, setShowModal] = useState(false);
     const [request, setRequest] = useState('');
   
-    const handleShowModal = (msg) => {
-      setRequest(msg);
-      setShowModal(true);
-    };
-  
-    const handleHideModal = () => {
-      setShowModal(false);
-      setRequest('');
-    };
   
     const {
       requests,
       loading,
       error,
       getRequests,
-      toggleFav,
       clearErrors,
       setAlert,
+      approveRequest,
+      declineRequest,
     } = props;
   
     useEffect(() => {
@@ -66,14 +60,24 @@ const Requests = (props) => {
   
       // eslint-disable-next-line
     }, [error]);
-    
+
+    const approve = async (id) => {
+        await approveRequest( id )
+
+    };
+  
+    const decline = async (id) => {
+        await declineRequest( id )
+
+    };
+
     return (
       <>
         <Helmet>
           <title>{`${WEBSITE_NAME} | Pending`}</title>
         </Helmet>
         <>
-          <div className='container-inner text-center'>
+          <div className={`${classes.page} card-shadow text-center`}>
             <div className='messages mx-auto'>
                 <h3 className='title'>All requests</h3>
               {loading ? (
@@ -96,21 +100,15 @@ const Requests = (props) => {
                     <RequestCard
                       key={request._id}
                       request={request}
-                      toggleFavAction={toggleFav}
-                      handleShowModal={handleShowModal}
+                      approveRequest={approve(request._id)}
+                      declineRequest={decline(request._id)}
                     />
                   ))}
                 </div>
               )}
             </div>
           </div>
-  
-          <RequestModal
-            key={request._id}
-            show={showModal}
-            request={request}
-            onHide={handleHideModal}
-          />
+
         </>
       </>
     );
@@ -124,7 +122,8 @@ const Requests = (props) => {
   
   export default connect(mapSateToProps, {
     getRequests,
-    toggleFav,
+    approveRequest,
+    declineRequest,
     clearErrors,
     setAlert,
   })(Requests);

@@ -1,4 +1,4 @@
-import colors from '../Styles/Color'
+import colors from './Color'
 
 export const BUTTON_PRIMARY = {
     background:  '#f06595',

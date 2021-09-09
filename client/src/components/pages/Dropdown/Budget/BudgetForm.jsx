@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import style from "./budgetForm.module.css";
 
 //Redux
 import { connect } from "react-redux";
@@ -24,10 +23,10 @@ const BudgetForm = ({ getBudget }) => {
   };
 
   return (
-    <div className={`${style.budgetForm} mt-5`}>
+    <div className='budgetForm mt-5'>
       <p className="label">Budget</p>
       <form onSubmit={handleSubmit}>
-        <div className={style.inputGroup}>
+        <div className='inputGroup'>
           <input
             type="number"
             placeholder="Add your budget..."
@@ -35,6 +34,7 @@ const BudgetForm = ({ getBudget }) => {
             value={budget}
             onChange={handleChange}
           />
+          < br />
           {error && <p className="error">{error}</p>}
           <button type="submit" className="button">
             Add Budget

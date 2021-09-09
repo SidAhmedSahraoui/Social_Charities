@@ -1,31 +1,22 @@
-.sid {
-  margin: 0px;
-  padding: 0px;
-  width: 20%;
-  float: left;
-  margin-bottom: 100%;
+:root {
+  --text-color: #666;
+  --background: linear-gradient(to right bottom, #1f4037, #99f2c8);
+  --white-color: #f7f7f7;
+  --md-grey-color: rgba(214, 214, 214, 1);
+  --blue-color: #1072db;
+  --blue-color-hover: #2a89fd;
+  --red-color: #d34836;
+  --red-color-error: rgb(233, 40, 15);
+  --red-color-error-background: #ffd2d2;
+  --green-color: #3d6c5b;
 }
 
-.req {
-  margin: 0px;
-  padding: 0px;
-  width: 80%;
-  float: right;
-}
-.cont {
-  width: 80%;
-  margin: 0vh auto;
-  background-color: var(--white-color);
-  border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  padding: 2.5rem;
-}
-
-.center-container {
+.center-cont {
   text-align: center;
+  margin-bottom: 0%;
 }
 
-.center-container h4 {
+.center-cont h4 {
   font-size: 2.5rem;
   font-weight: 500;
   color: var(--text-color);
@@ -37,19 +28,20 @@
 }
 
 .input {
-  width: 100%;
-  padding: 13px 5px;
-  border-radius: 3px;
-  border: 1px solid var(--md-grey-color);
-  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.3);
+  width: 50%;
+  box-shadow: 0px 13px 26px rgb(109, 184, 241, 0.16);
   margin-top: 2rem;
+  font-weight: 500;
+  border-radius: 10px;
+  padding: 8px 20px;
+  border: 2px solid;
 }
 
 .button {
   padding: 10px 20px;
   border: none;
   color: var(--white-color);
-  background: var(--blue-color);
+  background: #f06595;
   cursor: pointer;
   transition: background 0.2s, color 0.2s ease-in-out;
   border-radius: 3px;
@@ -73,7 +65,7 @@
 }
 
 .button:hover {
-  background: var(--blue-color-hover);
+  background: #c2255c;
 }
 
 .mt-05 {
@@ -114,17 +106,22 @@
   font-weight: 500;
   width: 14rem;
 }
-
+.icon {
+  width: 2.8rem;
+  height: 2.8rem;
+  fill: var(--white-color);
+  transition: fill 0.2s ease;
+}
 .green {
   color: var(--green-color);
   font-weight: bold;
-  font-size: 1.8rem;
+  font-size: 20px;
 }
 
 .red {
   color: var(--red-color);
   font-size: bold;
-  font-size: 1.8rem;
+  font-size: 20px;
 }
 
 .icon-green:hover {

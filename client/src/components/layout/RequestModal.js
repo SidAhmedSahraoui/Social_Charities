@@ -1,6 +1,5 @@
-import React from 'react';
 import { Modal } from 'react-bootstrap';
-
+import React from 'react'
 const RequestModal = ({ 
       show, 
       request, 
@@ -38,3 +37,6 @@ const RequestModal = ({
 };
 
 export default RequestModal;
+
+
+

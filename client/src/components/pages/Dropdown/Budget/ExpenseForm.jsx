@@ -72,6 +72,7 @@ const ExpenseForm = props => {
             value={expAmount}
             onChange={handleChange}
           />
+          <br />
           {error2 && <p className="error">{error2}</p>}
           <button type="submit" className="button">
             {expenses.isEdit === true ? "Edit expense" : "Add expense"}

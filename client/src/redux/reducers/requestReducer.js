@@ -7,6 +7,8 @@ import {
     CLEAR_REQUESTS,
     TOGGLE_FAV_ERROR,
     CLEAR_ERRORS,
+    APPROVE_REQUEST,
+    DELETE_REQUEST,
         } from '../types';
   
   
@@ -74,6 +76,22 @@ import {
         ...state,
         loading: true,
       };
+
+    case APPROVE_REQUEST :
+      return {
+        ...state,
+        error: false ,
+        loading: false ,
+        request: action.payload 
+      };
+
+    case DELETE_REQUEST :
+      return {
+          ...state,
+          error: false ,
+          loading: false ,
+          request: action.payload 
+        }
 
 
     case TOGGLE_FAV_ERROR:

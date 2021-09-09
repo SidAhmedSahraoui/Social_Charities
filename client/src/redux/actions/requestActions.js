@@ -9,6 +9,9 @@ import {
   REQUEST_SUCCESS,
   REQUEST_FAIL,
   TOGGLE_FAV_ERROR,
+  REQUEST_ERROR,
+  APPROVE_REQUEST,
+  DELETE_REQUEST
 } from '../types';
 
 
@@ -59,6 +62,57 @@ export const getRequests = () => async (dispatch) => {
     });
   }
 };
+
+
+// Approve Request
+export const approveRequest = (formData) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+
+    const res = await axios.post('/api/request/approve', formData, config);
+
+    dispatch({
+      type: APPROVE_REQUEST,
+      payload: res.data,
+    });
+
+  } catch (error) {
+    dispatch({
+      type: APPROVE_REQUEST ,
+      payload: error?.response?.data,
+    });
+  }
+};
+
+export const declineRequest = (formData) => async (dispatch) => {
+  const config = {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  };
+
+  try {
+
+    const res = await axios.delete('/api/request/delete', formData, config);
+
+    dispatch({
+      type: DELETE_REQUEST,
+      payload: res.data,
+    });
+
+  } catch (error) {
+    dispatch({
+      type: DELETE_REQUEST ,
+      payload: error?.response?.data,
+    });
+  }
+};
+
 // Set loading requests to true
 export const setLoadingRequests = () => {
   return { type: SET_LOADING_REQUESTS };

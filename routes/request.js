@@ -7,7 +7,7 @@ const { check, validationResult } = require('express-validator');
 const Request = require('../models/Request');
 
 
-//  @route       POST api/requests
+//  @route       POST api/request
 //  @desc        Register a request
 //  @access      Private
 router.post(
@@ -52,7 +52,7 @@ router.post(
   }
 );
 
-//  @route       GET api/requests
+//  @route       GET api/request
 //  @desc        Get admin requests
 //  @access      Private
 router.get('/', auth, async (req, res) => {
@@ -67,7 +67,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-//  @route       GET api/requests
+//  @route       GET api/request
 //  @desc        Get user requests
 //  @access      Private
 router.get('/', auth, async (req, res) => {
@@ -82,7 +82,7 @@ router.get('/', auth, async (req, res) => {
   }
 });
 
-//  @route       GET api/requests/fav
+//  @route       GET api/request/fav
 //  @desc        Get admin fav requests
 //  @access      Private
 router.get('/fav', auth, async (req, res) => {
@@ -100,7 +100,7 @@ router.get('/fav', auth, async (req, res) => {
 });
 
 
-//  @route       PUT api/requests/fav/:id
+//  @route       PUT api/request/fav/:id
 //  @desc        Add/Remove request to/from fav
 //  @access      Private
 router.put('/fav/:id', auth, async (req, res) => {
@@ -124,16 +124,34 @@ router.put('/fav/:id', auth, async (req, res) => {
   }
 });
 
-//  @route       DELETE api/requests/:id
+//  @route       DELETE api/request/:id
 //  @desc        Delete request
 //  @access      Private
-router.delete('/:id', auth, async (req, res) => {
+router.delete('/delete' , auth, async (req, res) => {
   try {
     let request = await Request.findById(req.params.id);
 
     if (!request) return res.status(404).json([{ msg: 'Request not found' }]);
 
     await Request.findByIdAndRemove(req.params.id);
+
+    res.json({ msg: 'Request removed' });
+  } catch (error) {
+    console.error(error.message);
+    res.status(500).send('Server Error');
+  }
+});
+
+//  @route       APPROVE api/request/:id
+//  @desc        approve request
+//  @access      Private
+router.delete('/approve' , auth, async (req, res) => {
+  try {
+    let request = await Request.findById(req.params.id);
+
+    if (!request) return res.status(404).json([{ msg: 'Request not found' }]);
+
+    await Request.findByIdAndUpdate(request_accept = true);
 
     res.json({ msg: 'Request removed' });
   } catch (error) {

@@ -6,6 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGripLines,
   faSignOutAlt,
+  faUsers ,
+  faCoins ,
+  faNewspaper ,
   faUser,
   faCheck,
   faCog,
@@ -47,25 +50,22 @@ const Navbar = (props) => {
         </Dropdown.Toggle>
 
         <Dropdown.Menu>
-          <Link
-            to={`/u/${user ? user.username : ""}`}
-            className="dropdown-item"
-          >
-            <FontAwesomeIcon className="icon mr-3" icon={faUser} size="lg" />
-            Profile
-          </Link>
-          <Link to="/pending" className="dropdown-item">
-            <FontAwesomeIcon className="icon mr-3" icon={faCheck} size="lg" />
-            Pending requests
-            {/* <Link className='dropdown-item' to='/users'>
-                    <FontAwesomeIcon className='icon mr-2' icon={faUsers} />
-                    Manage Users
-                  </Link> */}
-          </Link>
-          <Link to="/settings" className="dropdown-item">
-            <FontAwesomeIcon className="icon mr-3" icon={faCog} size="lg" />
-            Settings
-          </Link>
+                  <Link className='dropdown-item' to='/users'>
+                    <FontAwesomeIcon className='icon mr-2' icon={faUsers} size="lg" />
+                      Manage Users
+                  </Link> 
+                  <Link  className="dropdown-item" to="/pending">
+                    <FontAwesomeIcon className="icon mr-2" icon={faCheck} size="lg" />
+                      Pending requests
+                  </Link>
+                  <Link className='dropdown-item' to='/budget'>
+                    <FontAwesomeIcon className='icon mr-2' icon={faCoins} size="lg" />
+                      Budget
+                  </Link> 
+                  <Link className="dropdown-item" to="/settings">
+                    <FontAwesomeIcon className="icon mr-2" icon={faCog} size="lg" />
+                      Settings
+                  </Link> 
           <Dropdown.Divider></Dropdown.Divider>
           <button onClick={() => onLogout()} className="dropdown-item">
             <FontAwesomeIcon
@@ -94,12 +94,8 @@ const Navbar = (props) => {
             Profile
           </Link>
           <Link to="/messages" className="dropdown-item">
-            <FontAwesomeIcon className="icon mr-3" icon={faCheck} size="lg" />
-            Messages
-            {/* <Link className='dropdown-item' to='/users'>
-                    <FontAwesomeIcon className='icon mr-2' icon={faUsers} />
-                    Manage Users
-                  </Link> */}
+            <FontAwesomeIcon className="icon mr-3" icon={faNewspaper} size="lg" />
+            Messages 
           </Link>
           <Link to="/settings" className="dropdown-item">
             <FontAwesomeIcon className="icon mr-3" icon={faCog} size="lg" />

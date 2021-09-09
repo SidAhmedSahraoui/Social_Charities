@@ -32,6 +32,11 @@ export const GET_REQUESTS_ERROR = 'GET_REQUESTS_ERROR';
 export const CLEAR_REQUESTS = 'CLEAR_REQUESTS';
 export const TOGGLE_FAV_ERROR = 'TOGGLE_FAV_ERROR';
 
+export const APPROVE_REQUEST = 'APPROVE_REQUEST';
+export const DELETE_REQUEST = 'DELETE_REQUEST';
+export const REQUEST_ERROR = 'REQUEST_ERROR';
+
+
 // budget 
 export const GET_BUDGET = "GET_BUDGET";
 export const GET_EXPENSES = "GET_EXPENSES";

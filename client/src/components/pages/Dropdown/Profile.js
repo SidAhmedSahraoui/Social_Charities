@@ -11,8 +11,9 @@ import { setAlert } from '../../../redux/actions/alertActions';
 import { WEBSITE_NAME } from '../../../utils/Data';
 
 // App layout components
-
-
+import MalePicture from '../../../svg/male_avatar.svg';
+import FemalePicture from '../../../svg/female_avatar.svg'
+import OtherPicture from '../../../svg/male_avatar.svg'
 
 const Profile = (props) => {
   const {
@@ -67,8 +68,18 @@ const Profile = (props) => {
       </Helmet>
       <Container>
         <div className='container-inner px-3 mt-4 text-center'>
-            
             <div className='profile mx-auto'>
+              <img
+                className='picture'
+                src={
+                  gender === 1
+                    ? MalePicture
+                    : gender === 2
+                    ? FemalePicture
+                    : OtherPicture
+                }
+                alt='Profile'
+              />
               
 
               <div className='user-details mt-4'>
@@ -78,14 +89,7 @@ const Profile = (props) => {
                 </p>
                 <p className='bio'>
                   {'email : ' + email }
-                </p>
-                <p className='bio'>
-                  {'gender : ' + gender === 1 ? 'male' : gender === 2 ?  'female' : 'undefined'}
-                </p>
-                <p className='bio'>
-                  {'_id : ' + _id }
-                </p>
-                
+                </p>                
               </div>
               
                     <Form.Group>

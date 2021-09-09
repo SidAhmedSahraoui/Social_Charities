@@ -11,6 +11,7 @@ import Alert from "./layout/Alert";
 import Footer from "./layout/Footer/Footer";
 
 // pages
+<<<<<<< HEAD
 import Login from './pages/Auth/Login';
 import Register from './pages/Auth/Register';
 import Profile from './pages/Dropdown/Profile';
@@ -25,6 +26,22 @@ import Sol from './pages/Offers/description/Sol';
 import Oth from './pages/Offers/description/Oth';
 import Requests from './pages/Dropdown/requests';
 import Budget from './pages/Dropdown/Budget/budget';
+=======
+import Login from "./pages/Auth/Login";
+import Register from "./pages/Auth/Register";
+import Profile from "./pages/Dropdown/Profile";
+import Settings from "./pages/Dropdown/Settings";
+import NotFound from "./pages/NotFound";
+import Home from "./pages/Home/Home";
+import Offers from "./pages/Offers/Offers";
+import Request from "./pages/Requests/Request";
+import Hea from "./pages/Offers/description/Hea";
+import Soc from "./pages/Offers/description/Soc";
+import Sol from "./pages/Offers/description/Sol";
+import Oth from "./pages/Offers/description/Oth";
+import Requests from "./pages/Dropdown/requests";
+import Programme from "./pages/Programme/Programme";
+>>>>>>> 2399006916671d2687e2ddd6e02b5fb78afe6329
 // Routes
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
@@ -33,7 +50,10 @@ function App() {
   return (
     <Router>
       <Provider store={store}>
+<<<<<<< HEAD
         
+=======
+>>>>>>> 2399006916671d2687e2ddd6e02b5fb78afe6329
         <div className="app">
           <Route path="/" component={Navbar} />
           <Alert />

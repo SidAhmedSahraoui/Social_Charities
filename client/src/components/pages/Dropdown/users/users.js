@@ -4,40 +4,40 @@ import Helmet from 'react-helmet';
 
 // Actions
 import {
-  getRequests,
-  approveRequest,
-  declineRequest,
+  getUsers,
   clearErrors,
-} from '../../../redux/actions/requestActions';
-import { setAlert } from '../../../redux/actions/alertActions';
+} from '../../../../redux/actions/userActions';
+import { setAlert } from '../../../../redux/actions/alertActions';
 
 // App layout components
-import RequestCard from '../../layout/RequestCard';
+import UserCard from './userCard';
 // Components
 
-import useStyles from '../../layout/Navbar/navbar-jss';
+import useStyles from './users-jss';
 
 // Utils
-import { WEBSITE_NAME } from '../../../utils/Data';
+import { WEBSITE_NAME } from '../../../../utils/Data';
 
 
 
-const Requests = (props) => {
+const Users = (props) => {
   const classes = useStyles();
-    
+
+    const [user, setUser] = useState('');
+  
+  
     const {
-      requests,
+      users,
       loading,
       error,
-      getRequests,
+      getUsers,
       clearErrors,
       setAlert,
-      approveRequest,
-      declineRequest,
+      
     } = props;
   
     useEffect(() => {
-      getRequests();
+      getUsers();
   
       // eslint-disable-next-line
     }, []);
@@ -58,31 +58,23 @@ const Requests = (props) => {
       // eslint-disable-next-line
     }, [error]);
 
-    const approve = async (id) => {
-        await approveRequest( id )
 
-    };
-  
-    const decline = async (id) => {
-        await declineRequest( id )
-
-    };
 
     return (
       <>
         <Helmet>
-          <title>{`${WEBSITE_NAME} | Pending`}</title>
+          <title>{`${WEBSITE_NAME} | Users`}</title>
         </Helmet>
         <>
           <div className={`${classes.page} card-shadow text-center`}>
             <div className='messages mx-auto'>
-                <h3 className='title'>All requests</h3>
+                <h3 className='title'>All users</h3>
               {loading ? (
                 <div className='cards-container mt-5'>
-                  <RequestCard isLoading={true} />
-                  <RequestCard isLoading={true} />
+                  <UserCard isLoading={true} />
+                  <UserCard isLoading={true} />
                 </div>
-              ) : !requests || !requests.length ? (
+              ) : !users || !users.length ? (
                 <div className='empty'>
                   <h6 className='title mt-5'>
                     Empty inbox{' '}
@@ -92,13 +84,12 @@ const Requests = (props) => {
                   </h6>
                 </div>
               ) : (
-                <div className='cards-container mt-5'>
-                  {requests.map((request) => (
-                    <RequestCard
-                      key={request._id}
-                      request={request}
-                      approveRequest={approve(request._id)}
-                      declineRequest={decline(request._id)}
+                <div className='container mt-5'>
+                  {users.map((user) => (
+                    <UserCard
+                      key={user._id}
+                      user={user}
+                      
                     />
                   ))}
                 </div>
@@ -112,16 +103,14 @@ const Requests = (props) => {
   };
   
   const mapSateToProps = (state) => ({
-    requests: state.request.requests,
-    loading: state.request.loading,
-    error: state.request.error,
+    users: state.user.users,
+    loading: state.user.loading,
+    error: state.user.error,
   });
   
   export default connect(mapSateToProps, {
-    getRequests,
-    approveRequest,
-    declineRequest,
+    getUsers,
     clearErrors,
     setAlert,
-  })(Requests);
+  })(Users);
   

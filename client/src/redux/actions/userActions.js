@@ -3,6 +3,9 @@ import axios from 'axios';
 import {
   USER_PROFILE_LOADED,
   USER_PROFILE_ERROR,
+  GET_USERS,
+  GET_USERS_ERROR,
+  SET_LOADING_USERS,
   SET_LOADING_USER_PROFILE,
   CLEAR_ERRORS,
 } from '../types';
@@ -29,6 +32,29 @@ export const loadUserProfile = (username) => async (dispatch) => {
 // Set loading to true
 export const setLoading = () => {
   return { type: SET_LOADING_USER_PROFILE };
+};
+
+// Get users
+export const getUsers = () => async (dispatch) => {
+  try {
+    dispatch(setLoadingUsers());
+    const res = await axios.get('/api/users');
+
+    dispatch({
+      type: GET_USERS,
+      payload: res.data,
+    });
+  } catch (error) {
+    dispatch({
+      type: GET_USERS_ERROR,
+      payload: error.response?.data,
+    });
+  }
+};
+
+// Set loading users to true
+export const setLoadingUsers = () => {
+  return { type: SET_LOADING_USERS };
 };
 
 // Clear errors

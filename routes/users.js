@@ -172,4 +172,20 @@ router.get('/:username', async (req, res) => {
   }
 });
 
+
+//  @route       GET api/users
+//  @desc        Get all users
+//  @access      Private
+router.get('/', auth, async (req, res) => {
+  try {
+    const users = await User.find().sort({
+      date: 1,
+    });
+    res.json(users);
+  } catch (error) {
+    console.log(error.user);
+    res.status(500).send('Server Error');
+  }
+});
+
 module.exports = router;

@@ -3,6 +3,9 @@ import {
   USER_PROFILE_ERROR,
   SET_LOADING_USER_PROFILE,
   CLEAR_ERRORS,
+  SET_LOADING_USERS,
+  GET_USERS,
+  GET_USERS_ERROR,
 } from '../types';
 
 const initialState = {
@@ -38,6 +41,30 @@ export default (state = initialState, action) => {
       return {
         ...state,
         error: null,
+      };
+
+
+      case GET_USERS :
+        return {
+        ...state,
+        error: false,
+        loading: false,
+        users: action.payload,
+      };
+      
+
+      case GET_USERS_ERROR:
+        return {
+        ...state,
+        error: action.payload,
+        loading: false,
+      };
+
+
+    case SET_LOADING_USERS:
+      return {
+        ...state,
+        loading: true,
       };
 
     default:

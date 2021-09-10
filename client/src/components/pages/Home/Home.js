@@ -6,7 +6,7 @@ import { WEBSITE_NAME } from '../../../utils/Data';
 
 // Images
 import Home01 from '../../../images/logo avec script.png';
-import About from '../../../images/about.svg'
+import About from '../../../images/Online.svg'
 import Online from '../../../images/online-order.svg';
 import Smart from '../../../images/smartphone.svg';
 import Settings from '../../../images/settings.svg';

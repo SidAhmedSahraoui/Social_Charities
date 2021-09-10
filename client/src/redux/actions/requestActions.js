@@ -65,53 +65,26 @@ export const getRequests = () => async (dispatch) => {
 
 
 // Approve Request
-export const approveRequest = (formData) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  try {
-
-    const res = await axios.post('/api/request/approve', formData, config);
-
+export const approveRequest = id => dispatch => {
+  axios.post(`/api/request/${id}`).then(res => {
     dispatch({
       type: APPROVE_REQUEST,
-      payload: res.data,
+      payload: id
     });
-
-  } catch (error) {
-    dispatch({
-      type: APPROVE_REQUEST ,
-      payload: error?.response?.data,
-    });
-  }
+  });
 };
 
-export const declineRequest = (formData) => async (dispatch) => {
-  const config = {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  try {
-
-    const res = await axios.delete('/api/request/delete', formData, config);
-
+// DELETE request
+export const deleteRequest = id => dispatch => {
+  axios.delete(`/api/request/${id}`).then(res => {
     dispatch({
       type: DELETE_REQUEST,
-      payload: res.data,
+      payload: id
     });
-
-  } catch (error) {
-    dispatch({
-      type: DELETE_REQUEST ,
-      payload: error?.response?.data,
-    });
-  }
+  });
 };
+
+
 
 // Set loading requests to true
 export const setLoadingRequests = () => {

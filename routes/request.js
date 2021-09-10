@@ -58,7 +58,7 @@ router.post(
 router.get('/', auth, async (req, res) => {
   try {
     const requests = await Request.find().sort({
-      name: -1,
+      date: -1,
     });
     res.json(requests);
   } catch (error) {
@@ -127,37 +127,29 @@ router.put('/fav/:id', auth, async (req, res) => {
 //  @route       DELETE api/request/:id
 //  @desc        Delete request
 //  @access      Private
-router.delete('/delete' , auth, async (req, res) => {
-  try {
-    let request = await Request.findById(req.params.id);
-
-    if (!request) return res.status(404).json([{ msg: 'Request not found' }]);
-
-    await Request.findByIdAndRemove(req.params.id);
-
-    res.json({ msg: 'Request removed' });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server Error');
-  }
+router.delete("/:id", (req, res) => {
+  Request.findById(req.params.id).then(request =>
+    request
+      .remove()
+      .then(() => res.json({ success: true }))
+      .catch(error => {
+        res.status(404).json({ error: "Id not found" });
+      })
+  );
 });
+
 
 //  @route       APPROVE api/request/:id
 //  @desc        approve request
 //  @access      Private
-router.delete('/approve' , auth, async (req, res) => {
-  try {
-    let request = await Request.findById(req.params.id);
-
-    if (!request) return res.status(404).json([{ msg: 'Request not found' }]);
-
-    await Request.findByIdAndUpdate(request_accept = true);
-
-    res.json({ msg: 'Request removed' });
-  } catch (error) {
-    console.error(error.message);
-    res.status(500).send('Server Error');
-  }
+router.post("/:id", (req, res) => {
+  Request.findByIdAndUpdate(req.params.id, 
+                       { request_accept : true }, )
+      .then(() => res.json({ success: true }))
+      .catch(error => {
+        res.status(404).json({ error: "Id not found" });
+      })
 });
+
 
 module.exports = router;

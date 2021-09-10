@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import "./Programme.css";
 import axios from "axios";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-import { faPlusCircle } from "@fortawesome/free-solid-svg-icons";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import ListModal from "./ListModal";
+import ListModal from "./ListModalAdmin";
 
 const Chapitre = (props) => (
   <div className="list-group-item">

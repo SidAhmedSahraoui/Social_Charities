@@ -27,7 +27,6 @@ import Requests from "./pages/Dropdown/requests";
 import Budget from "./pages/Dropdown/Budget/budget";
 import Programme from "./pages/Programme/Programme";
 import ProgrammeAdmin from "./pages/Programme/ProgrammeAdmin";
-import ListModal from "./pages/Programme/ListModal";
 // Routes
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
@@ -60,7 +59,6 @@ function App() {
             <Route exact path="/offers/sol" component={Sol} />
             <Route exact path="/offers/oth" component={Oth} />
             <Route exact path="/programme" component={Programme} />
-            <Route exact path="/Listmodal" component={ListModal} />
             <Route exact path="/404" component={NotFound} />
             <Route component={NotFound} />
           </Switch>

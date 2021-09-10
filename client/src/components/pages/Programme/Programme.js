@@ -1,28 +1,89 @@
 import React, { Component } from "react";
 import "./Programme.css";
 import axios from "axios";
-import ListModal from "./ListModal";
+import ListModal from "./ListModalUser";
 
 const Chapitre = (props) => (
-  <a href="#" className="list-group-item" onClick={props.handleClick}>
-    {props.chapitre.titre}
+  <div className="list-group-item">
+    <a
+      href="#"
+      className="list-group-item"
+      onClick={props.handleClick}
+      style={{ color: "#1a202c" }}
+    >
+      {props.chapitre.titre}
+    </a>
     <div className="list-group">
       <tbody>{props.sousChapitre}</tbody>
     </div>
-  </a>
+
+    {/* admin controle buttons */}
+    {/* <FontAwesomeIcon
+      className="icons"
+      icon={faTrash}
+      onClick={props.handleRemove}
+    />
+    <FontAwesomeIcon
+      className="icons"
+      icon={faPlusCircle}
+      onClick={props.handleInputFieldAdd}
+    />
+    <FontAwesomeIcon
+      className="icons"
+      icon={faEdit}
+      onClick={props.handleInputFieldEdit}
+    /> */}
+    {/* props form to add to the program list */}
+    {/* {props.state.showInputAdd ? (
+      <form onSubmit={props.handleSubmitAdd}>
+        <input
+          type="text"
+          name="name"
+          value={props.state.value}
+          onChange={props.handleChangeAdd}
+        />
+        <input type="submit" name="Submit" />
+      </form>
+    ) : null} */}
+    {/* props form to edit to the program list */}
+    {/* {props.state.showInputEdit ? (
+      <form onSubmit={props.handleSubmitEdit}>
+        <input
+          type="text"
+          name="name"
+          value={props.state.value}
+          onChange={props.handleChangeEdit}
+        />
+        <input type="submit" name="Submit" />
+      </form>
+    ) : null} */}
+  </div>
 );
 
 const SousChapitre = (props) => (
-  <a href="#" className="list-group-item" onClick={props.handleClick}>
-    {props.sousChapitre.titre}
+  <>
+    <a
+      href="#"
+      className="list-group-item"
+      onClick={props.handleClick}
+      style={{ color: "#718096" }}
+    >
+      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{props.sousChapitre.titre}
+    </a>
     <div className="list-group">
       <tbody>{props.article}</tbody>
     </div>
-  </a>
+  </>
 );
 
 const Article = (props) => (
-  <a href="#" className="list-group-item" onClick={props.handleClick}>
+  <a
+    href="#"
+    className="list-group-item"
+    onClick={props.handleClick}
+    style={{ color: "#a0aec0" }}
+  >
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     {props.article.titre}
   </a>
 );
@@ -37,7 +98,13 @@ export default class Programme extends Component {
       articles: [],
       show: false,
       showModal: false,
+      showInputAdd: false,
+      showInputEdit: false,
+      value: "",
+      Selected: "",
+      article_type: "",
     };
+
     //
     this.handleClick = this.handleClick.bind(this);
     this.handleShow = this.handleShow.bind(this);
@@ -83,7 +150,18 @@ export default class Programme extends Component {
             chapitre={currentChapitre}
             key={currentChapitre._id}
             sousChapitre={this.sousChapitreList(currentChapitre._id)}
-            handleClick={this.handleClick}
+            handleClick={() => {
+              // switch the value of the showModal state
+              this.setState({
+                article_type: "chapitre",
+              });
+              this.setState({
+                Selected: currentChapitre,
+              });
+              this.setState({
+                showModal: !this.state.showModal,
+              });
+            }}
           />
         );
       });
@@ -101,8 +179,19 @@ export default class Programme extends Component {
             <SousChapitre
               sousChapitre={currentSousChapitre}
               key={currentSousChapitre._id}
-              article={this.articleList(currentSousChapitre)}
-              handleClick={this.handleClick}
+              article={this.articleList(currentSousChapitre._id)}
+              handleClick={() => {
+                // switch the value of the showModal state
+                this.setState({
+                  article_type: "sousChapitre",
+                });
+                this.setState({
+                  Selected: currentSousChapitre,
+                });
+                this.setState({
+                  showModal: !this.state.showModal,
+                });
+              }}
             />
           );
         });
@@ -111,18 +200,34 @@ export default class Programme extends Component {
 
   articleList(sousChapitreID) {
     if (this.state.articles) {
-      return this.state.articles.map((currentArticle) => {
-        return (
-          <Article
-            article={currentArticle}
-            key={currentArticle._id}
-            handleClick={this.handleClick}
-          />
-        );
-      });
+      return this.state.articles
+        .filter((currentArticle) => {
+          return sousChapitreID == currentArticle.sous_chapitre;
+        })
+        .map((currentArticle) => {
+          return (
+            <Article
+              article={currentArticle}
+              key={currentArticle._id}
+              handleClick={() => {
+                // switch the value of the showModal state
+                this.setState({
+                  article_type: "article",
+                });
+                this.setState({
+                  Selected: currentArticle,
+                });
+                this.setState({
+                  showModal: !this.state.showModal,
+                });
+              }}
+            />
+          );
+        });
     }
   }
 
+  // -- show/hide modal --
   handleClose() {
     this.setState({ show: false });
   }
@@ -132,17 +237,26 @@ export default class Programme extends Component {
   }
 
   handleClick() {
+    // console.log(id);
     // switch the value of the showModal state
     this.setState({
       showModal: !this.state.showModal,
     });
   }
+  // // ----------------------------
 
   render() {
     const { useStyles } = this.props;
     if (this.state.showModal) {
       // show the modal if state showModal is true
-      return <ListModal show={this.handleShow} onHide={this.handleClick} />;
+      return (
+        <ListModal
+          show={this.handleShow}
+          onHide={this.handleClick}
+          element={this.state.Selected}
+          articleType={this.state.article_type}
+        />
+      );
     }
     return (
       <div>
@@ -154,159 +268,4 @@ export default class Programme extends Component {
       </div>
     );
   }
-
-  /*
-  render(){ 
-    return (
-      <div>
-        <Navbar />
-        <div className="just-padding">
-          <div className="list-group list-group-root well">
-            <a href="#" className="list-group-item">
-              Item 1
-            </a>
-            <div className="list-group">
-              <a href="#" className="list-group-item">
-                Item 1.1
-              </a>
-              <div className="list-group">
-                <a href="#" className="list-group-item">
-                  Item 1.1.1
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 1.1.2
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 1.1.3
-                </a>
-              </div>
-              <a href="#" className="list-group-item">
-                Item 1.2
-              </a>
-              <div className="list-group">
-                <a href="#" className="list-group-item">
-                  Item 1.2.1
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 1.2.2
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 1.2.3
-                </a>
-              </div>
-              <a href="#" className="list-group-item">
-                Item 1.3
-              </a>
-              <div className="list-group">
-                <a href="#" className="list-group-item">
-                  Item 1.3.1
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 1.3.2
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 1.3.3
-                </a>
-              </div>
-            </div>
-            <a href="#" className="list-group-item">
-              Item 2
-            </a>
-            <div className="list-group">
-              <a href="#" className="list-group-item">
-                Item 2.1
-              </a>
-              <div className="list-group">
-                <a href="#" className="list-group-item">
-                  Item 2.1.1
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 2.1.2
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 2.1.3
-                </a>
-              </div>
-              <a href="#" className="list-group-item">
-                Item 2.2
-              </a>
-              <div className="list-group">
-                <a href="#" className="list-group-item">
-                  Item 2.2.1
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 2.2.2
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 2.2.3
-                </a>
-              </div>
-              <a href="#" className="list-group-item">
-                Item 2.3
-              </a>
-              <div className="list-group">
-                <a href="#" className="list-group-item">
-                  Item 2.3.1
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 2.3.2
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 2.3.3
-                </a>
-              </div>
-            </div>
-            <a href="#" className="list-group-item">
-              Item 3
-            </a>
-            <div className="list-group">
-              <a href="#" className="list-group-item">
-                Item 3.1
-              </a>
-              <div className="list-group">
-                <a href="#" className="list-group-item">
-                  Item 3.1.1
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 3.1.2
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 3.1.3
-                </a>
-              </div>
-              <a href="#" className="list-group-item">
-                Item 3.2
-              </a>
-              <div className="list-group">
-                <a href="#" className="list-group-item">
-                  Item 3.2.1
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 3.2.2
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 3.2.3
-                </a>
-              </div>
-              <a href="#" className="list-group-item">
-                Item 3.3
-              </a>
-              <div className="list-group">
-                <a href="#" className="list-group-item">
-                  Item 3.3.1
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 3.3.2
-                </a>
-                <a href="#" className="list-group-item">
-                  Item 3.3.3
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        <Footer />
-      </div>
-    );
-  }*/
 }

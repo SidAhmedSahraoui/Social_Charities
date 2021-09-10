@@ -25,7 +25,7 @@ export const USER_PROFILE_ERROR = 'USER_PROFILE_ERROR';
 export const GET_USERS = 'GET_USERS';
 export const GET_USERS_ERROR = 'GET_USERS_ERROR';
 export const SET_LOADING_USERS = 'SET_LOADING_USERS';
-
+export const DELETE_USER = 'DELETE_USER';
 // requests
 export const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 export const REQUEST_FAIL = 'REQUEST_FAIL';

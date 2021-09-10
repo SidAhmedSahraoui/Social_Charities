@@ -12,7 +12,7 @@ import {
 
 const useStyles = createUseStyles({
   page: {
-    padding: '0px 0px',
+    padding: '0px 0px 50px 0px',
     marginBottom: '40px',
     '@media screen and (min-width: 992px)': {
       '& .button-primary': BUTTON_PRIMARY,
@@ -22,6 +22,18 @@ const useStyles = createUseStyles({
     '&.card-shadow': CARD_SHADOW,
     '&> .title': {
       color: colors.primary
+    },
+    '& .subone' : {
+        color: colors['primary-hover']
+    },
+    '& .accepted': {
+        color : colors.success
+    },
+    '& .refused' : {
+          color: colors.danger 
+    },
+    '& .container' : {
+        width : '100%'
     },
     '& .subtitle': {
       color: colors['text-gray-700'],
@@ -66,6 +78,7 @@ const useStyles = createUseStyles({
         }
       },
       '& .messages': {
+        width : '100%',
         '& .message': {
           marginBottom: '1rem'
         },

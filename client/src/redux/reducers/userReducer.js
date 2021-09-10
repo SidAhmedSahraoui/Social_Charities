@@ -6,12 +6,14 @@ import {
   SET_LOADING_USERS,
   GET_USERS,
   GET_USERS_ERROR,
+  DELETE_USER,
 } from '../types';
 
 const initialState = {
   user_profile: null,
   loading: false,
   error: null,
+  users:null,
 };
 
 export default (state = initialState, action) => {
@@ -51,6 +53,15 @@ export default (state = initialState, action) => {
         loading: false,
         users: action.payload,
       };
+
+      case DELETE_USER :
+      return  {
+        ...state,
+        users: state.users.filter(user => {
+          return user._id !== action.payload;
+        })
+      };
+
       
 
       case GET_USERS_ERROR:

@@ -8,6 +8,7 @@ import {
   SET_LOADING_USERS,
   SET_LOADING_USER_PROFILE,
   CLEAR_ERRORS,
+  DELETE_USER,
 } from '../types';
 
 // Load User
@@ -51,6 +52,16 @@ export const getUsers = () => async (dispatch) => {
     });
   }
 };
+// DELETE USER
+export const deleteUser = id => dispatch => {
+  axios.delete(`/api/users/${id}`).then(res => {
+    dispatch({
+      type: DELETE_USER,
+      payload: id
+    });
+  });
+};
+
 
 // Set loading users to true
 export const setLoadingUsers = () => {

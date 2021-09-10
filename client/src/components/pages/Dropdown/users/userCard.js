@@ -1,38 +1,39 @@
 import React from 'react';
-
+import { connect } from 'react-redux';
 import useStyles from './users-jss';
 // Utils
 import calcDays from '../../../../utils/calcDays';
 import { faUserCircle, faCircle } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { deleteUser } from '../../../../redux/actions/userActions';
+import { setAlert } from '../../../../redux/actions/alertActions';
 const UserCard =({
-  user 
-      
+  user ,
+  deleteUser    
         }) => {
 
 
   const { 
-    allow_messages ,
     date,
     email,
     gender,
-    name,
-    password,
     post,
-    role_id,
     username,
     _id,
   } = user || {};
  
   const classes = useStyles();
 
+  const supprime =   (id) => {
+    setAlert('Request deleted', 'danger');
+     deleteUser(id);
+};
 
   return (
     <div className={`${classes.page}`}>
-<div className='card-shadow text-left p-4'>
-  <div className='card-inner d-flex flex-column justify-content-between'>    
-    <div className='messageitem d-flex align-items-center justify-content-between'>
+<div className='card-shadow messageitem  text-left p-4'>
+  <div className='card-inner  d-flex flex-column justify-content-between'>    
+    <div className=' d-flex align-items-center justify-content-between'>
     <div>
         <FontAwesomeIcon className='icon' icon={faUserCircle} />
     </div>
@@ -48,10 +49,9 @@ const UserCard =({
 
     <span className='date'>{calcDays(date)}</span>
 
-      <button className='button-primary'>
+      <button className='button-primary' onClick={() => {supprime(_id);}}>
         Delete
       </button>
-
     </div>
   </div>
 </div>
@@ -59,5 +59,13 @@ const UserCard =({
     
   );
 };
+const mapSateToProps = (state) => ({
+users: state.user.users,
+loading: state.user.loading,
+error: state.user.error,
+});
 
-export default UserCard;
+export default connect(mapSateToProps, {
+deleteUser,
+setAlert,
+})(UserCard);

@@ -78,20 +78,21 @@ import {
       };
 
     case APPROVE_REQUEST :
-      return {
+      return  {
         ...state,
-        error: false ,
-        loading: false ,
-        request: action.payload 
+        requests: state.requests.filter(request => {
+          return request._id !== action.payload;
+        })
       };
 
+
     case DELETE_REQUEST :
-      return {
-          ...state,
-          error: false ,
-          loading: false ,
-          request: action.payload 
-        }
+      return  {
+        ...state,
+        requests: state.requests.filter(request => {
+          return request._id !== action.payload;
+        })
+      };
 
 
     case TOGGLE_FAV_ERROR:

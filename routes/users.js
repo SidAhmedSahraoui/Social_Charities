@@ -68,6 +68,21 @@ router.post(
   }
 );
 
+//  @route       DELETE api/users/:id
+//  @desc        Delete user
+//  @access      Private
+router.delete("/:id", (req, res) => {
+  Request.findById(req.params.id).then(request =>
+    request
+      .remove()
+      .then(() => res.json({ success: true }))
+      .catch(error => {
+        res.status(404).json({ error: "Id not found" });
+      })
+  );
+});
+
+
 //  @route       PUT api/users/
 //  @desc        Update a user
 //  @access      Private
@@ -186,6 +201,20 @@ router.get('/', auth, async (req, res) => {
     console.log(error.user);
     res.status(500).send('Server Error');
   }
+});
+
+//  @route       DELETE api/users/:id
+//  @desc        Delete user
+//  @access      Private
+router.delete("/:id", (req, res) => {
+  User.findById(req.params.id).then(user =>
+      user
+      .remove()
+      .then(() => res.json({ success: true }))
+      .catch(error => {
+        res.status(404).json({ error: "Id not found" });
+      })
+  );
 });
 
 module.exports = router;

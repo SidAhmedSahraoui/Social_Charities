@@ -91,8 +91,7 @@ export const BUTTON_PRIMARY = {
   };
   
   export const POSTITEM_CARD = {
-    borderRadius: '10px',
-    border: '2px solid #eee',
+    
     '&:hover': {
       'box-shadow': '0px 13px 26px rgb(109,184,241, 0.16)',
     },

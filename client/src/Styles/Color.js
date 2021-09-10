@@ -3,6 +3,7 @@ export default {
     'primary-hover': '#46B0C6',
     danger: '#dc5f5f',
     request: '#9340e6',
+    success: '#18cb9a',
     'text-transparent': 'transparent',
     'text-black': '#000',
     'text-white': '#fff',

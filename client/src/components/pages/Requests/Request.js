@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Container, Form } from 'react-bootstrap';
 import useStyles from './Request-jss';
+import axios from "axios";
 
 // Actions
 import { request, clearErrors } from '../../../redux/actions/requestActions';
@@ -14,7 +15,34 @@ import Input from './InputElement'
 // Utils
 import { WEBSITE_NAME } from '../../../utils/Data';
 
+////////////
+let data = '';
+var options = [{value: '', displayValue: 'All categories'}];
+axios.get('http://localhost:5000/chapitres')
+    .then(result =>{
+      data = result.data;
+      
+      for (const chapitre of data) {
+        options.push({value: chapitre._id, displayValue: chapitre.titre});
+      };
+    }).catch(error=>{
+      console.log(error);
+    });
 
+/////////////
+let offersData = '';
+var sousCOptions = [{value: '', chapitre: '', displayValue: 'All categories'}];
+axios.get('http://localhost:5000/sous_chapitres')
+    .then(result =>{
+      data = result.data;
+      
+      for (const sousChapitre of data) {
+        sousCOptions.push({value: sousChapitre._id, chapitre: sousChapitre.chapitre, displayValue: sousChapitre.titre});
+      };
+    }).catch(error=>{
+      console.log(error);
+});
+////////////////
 const Request = (props) => {
   const {
     error,
@@ -56,13 +84,14 @@ const Request = (props) => {
         category: {
             elementType: 'select',
             elementConfig: {
-                options: [
-                    {value: '', displayValue: 'All categories'},
-                    {value: 'Social aid', displayValue: 'Social aid'},
-                    {value: 'Health services', displayValue: 'Health services'},
-                    {value: 'Solidarity', displayValue: 'Solidarity'},
-                    {value: 'Other services', displayValue: 'Other services'}
-                ]
+              options  
+              // options: [
+                //     {value: '', displayValue: 'All categories'},
+                //     {value: 'Social aid', displayValue: 'Social aid'},
+                //     {value: 'Health services', displayValue: 'Health services'},
+                //     {value: 'Solidarity', displayValue: 'Solidarity'},
+                //     {value: 'Other services', displayValue: 'Other services'}
+                // ]
             },
             value: '',
             validation: {},
@@ -168,42 +197,59 @@ const inputChangedHandler = (event, inputIdentifier) => {
 
       ]
   }
-  if (updatedOrderForm.category.value === 'Social aid') {
-      updatedOrderForm.offer.elementConfig.options = [
-           {value: '', displayValue: 'All offers'},
-          {value: 'Retirement', displayValue: 'Retirement'},
-          {value: 'Death', displayValue: 'Death'},
-          {value: 'Marriage', displayValue: 'Marriage'},
-          {value: 'New born', displayValue: 'New born'},
-          {value: 'Circumcision', displayValue: 'Circumcision'}
-      ]
-  };
-  if (updatedOrderForm.category.value === 'Health services') {
-      updatedOrderForm.offer.elementConfig.options = [
-          {value: '', displayValue: 'All offers'},
-          {value: 'Surgery operations', displayValue: 'Surgery operations'},
-          {value: 'Hammamat( mineral bath )', displayValue: 'Hammamat( mineral bath )'}
-      ]
-  };
-  if (updatedOrderForm.category.value === 'Solidarity') {
-      updatedOrderForm.offer.elementConfig.options = [
-         {value: '', displayValue: 'All offers'},
-          {value: 'Aids for accident and catastrophe', displayValue: 'Aids for accident and catastrophe'},
-          {value: ' Aids for the exceptional cases', displayValue: ' Aids for the exceptional cases'},
-      ]
-  };
-  if (updatedOrderForm.category.value === 'Other services') {
-      updatedOrderForm.offer.elementConfig.options =[
-          {value: '', displayValue: 'All offers'},
-          {value: 'Exceptional loan', displayValue: 'Exceptional loan'},
-          {value: 'Sport and cultural activities', displayValue: 'Sport and cultural activities'},
-      ]
-  };
+  
   if (updatedOrderForm.category.value === 'All categories') {
-      updatedOrderForm.offer.elementConfig.options =[
-          {value: '', displayValue: 'offers'}
-      ]
+    updatedOrderForm.offer.elementConfig.options =[
+        {value: '', displayValue: 'offers'}
+    ]
   }
+  var selectedID = updatedOrderForm.category.value;
+  // for (const element of options) {
+  //   if(updatedOrderForm.category.value == element.displayValue){
+  //     selectedID = element.value;
+  //   }
+  // };
+
+
+  updatedOrderForm.offer.elementConfig.options = [{value: '', displayValue: 'All offers'}];
+  for (const element of sousCOptions){
+    if(element.chapitre == selectedID){
+      updatedOrderForm.offer.elementConfig.options.push({value: element._id, displayValue: element.displayValue});
+    }
+  }
+
+  // if (updatedOrderForm.category.value === 'Social aid') {
+  //     updatedOrderForm.offer.elementConfig.options = [
+  //          {value: '', displayValue: 'All offers'},
+  //         {value: 'Retirement', displayValue: 'Retirement'},
+  //         {value: 'Death', displayValue: 'Death'},
+  //         {value: 'Marriage', displayValue: 'Marriage'},
+  //         {value: 'New born', displayValue: 'New born'},
+  //         {value: 'Circumcision', displayValue: 'Circumcision'}
+  //     ]
+  // };
+  // if (updatedOrderForm.category.value === 'Health services') {
+  //     updatedOrderForm.offer.elementConfig.options = [
+  //         {value: '', displayValue: 'All offers'},
+  //         {value: 'Surgery operations', displayValue: 'Surgery operations'},
+  //         {value: 'Hammamat( mineral bath )', displayValue: 'Hammamat( mineral bath )'}
+  //     ]
+  // };
+  // if (updatedOrderForm.category.value === 'Solidarity') {
+  //     updatedOrderForm.offer.elementConfig.options = [
+  //        {value: '', displayValue: 'All offers'},
+  //         {value: 'Aids for accident and catastrophe', displayValue: 'Aids for accident and catastrophe'},
+  //         {value: ' Aids for the exceptional cases', displayValue: ' Aids for the exceptional cases'},
+  //     ]
+  // };
+  // if (updatedOrderForm.category.value === 'Other services') {
+  //     updatedOrderForm.offer.elementConfig.options =[
+  //         {value: '', displayValue: 'All offers'},
+  //         {value: 'Exceptional loan', displayValue: 'Exceptional loan'},
+  //         {value: 'Sport and cultural activities', displayValue: 'Sport and cultural activities'},
+  //     ]
+  // };
+  
   
   let formIsValid = true;
   for (let inputIdentifier in updatedOrderForm) {
@@ -229,7 +275,7 @@ const formElementsArray = [];
         <div className='container-inner px-3 mt-4'>
           <div className='auth mx-auto'>
             <h4 className='mb-3 text-center '>
-              <strong className='title' >Add a request</strong>
+              <strong className='title' >Add a request {`${sousCOptions.length}`}</strong>
             </h4>
         
                
@@ -263,10 +309,6 @@ const formElementsArray = [];
                 )}
               </div>
          
-
-
-
-
             </Form>
           </div>
         </div>

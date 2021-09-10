@@ -1,5 +1,5 @@
 .just-padding {
-  padding: 15px;
+  padding: 20px 180px 60px;
 }
 
 .list-group.list-group-root {
@@ -15,6 +15,8 @@
   color: #4a5568;
   border-radius: 0;
   border-width: 1px 0 0 0;
+  grid-gap: 20px;
+  grid-template-columns: 100%;
 }
 
 .list-group.list-group-root > .list-group-item:first-child {
@@ -31,4 +33,13 @@
 
 .list-group-item .glyphicon {
   margin-right: 5px;
+}
+
+.text-link {
+  color: #4a5568;
+}
+.icons {
+  float: right;
+  margin-right: 20px;
+  cursor: pointer;
 }

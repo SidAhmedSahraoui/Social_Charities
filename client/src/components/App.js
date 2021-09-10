@@ -27,7 +27,9 @@ import Requests from "./pages/Dropdown/Requests/requests";
 import Programme from "./pages/Programme/Programme";
 import Budget from './pages/Dropdown/Budget/budget';
 import Users from './pages/Dropdown/users/users';
-import Contact from '../images/contact_us.svg'
+import Programme from "./pages/Programme/Programme";
+import ProgrammeAdmin from "./pages/Programme/ProgrammeAdmin";
+import ListModal from "./pages/Programme/ListModal";
 // Routes
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
@@ -48,12 +50,19 @@ function App() {
             <AdminRoute exact path='/pending' component={Requests}  />
             <AdminRoute exact path='/users' component={Users}  />
             <AdminRoute exact path='/budget' component={Budget}  />
+            <AdminRoute
+              exact
+              path="/programmeAdmin"
+              component={ProgrammeAdmin}
+            />
             <Route exact path="/" component={Home} />
             <Route exact path="/offers" component={Offers} />
             <Route exact path="/offers/hea" component={Hea} />
             <Route exact path="/offers/soc" component={Soc} />
             <Route exact path="/offers/sol" component={Sol} />
             <Route exact path="/offers/oth" component={Oth} />
+            <Route exact path="/programme" component={Programme} />
+            <Route exact path="/Listmodal" component={ListModal} />
             <Route exact path="/404" component={NotFound} />
             <Route component={NotFound} />
           </Switch>

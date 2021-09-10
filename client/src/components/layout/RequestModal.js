@@ -1,19 +1,8 @@
-<<<<<<< HEAD
-import { Modal } from 'react-bootstrap';
-import React from 'react'
-const RequestModal = ({ 
-      show, 
-      request, 
-      onHide    }) => {
-
-  const { category , offer, request_accept , date } = request || {};
-=======
 import React from "react";
 import { Modal } from "react-bootstrap";
 import "./RequestModal.css";
 const RequestModal = ({ show, request, onHide }) => {
   const { category, offer, request_accept, date } = request || {};
->>>>>>> 2399006916671d2687e2ddd6e02b5fb78afe6329
 
   return (
     <>
@@ -50,6 +39,3 @@ const RequestModal = ({ show, request, onHide }) => {
 };
 
 export default RequestModal;
-
-
-

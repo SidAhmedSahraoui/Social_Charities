@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import "./Programme.css";
 import axios from "axios";
+import ListModal from "./ListModal";
 
 const Chapitre = (props) => (
-  <a href="#" className="list-group-item">
+  <a href="#" className="list-group-item" onClick={props.handleClick}>
     {props.chapitre.titre}
     <div className="list-group">
       <tbody>{props.sousChapitre}</tbody>
@@ -12,7 +13,7 @@ const Chapitre = (props) => (
 );
 
 const SousChapitre = (props) => (
-  <a href="#" className="list-group-item">
+  <a href="#" className="list-group-item" onClick={props.handleClick}>
     {props.sousChapitre.titre}
     <div className="list-group">
       <tbody>{props.article}</tbody>
@@ -21,16 +22,26 @@ const SousChapitre = (props) => (
 );
 
 const Article = (props) => (
-  <a href="#" className="list-group-item">
+  <a href="#" className="list-group-item" onClick={props.handleClick}>
     {props.article.titre}
   </a>
 );
 
 export default class Programme extends Component {
   //initialize items arrays
-  constructor(props) {
-    super(props);
-    this.state = { chapitres: [[]], sousChapitres: [], articles: [] };
+  constructor(props, context) {
+    super(props, context);
+    this.state = {
+      chapitres: [[]],
+      sousChapitres: [],
+      articles: [],
+      show: false,
+      showModal: false,
+    };
+    //
+    this.handleClick = this.handleClick.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+    this.handleClose = this.handleClose.bind(this);
   }
 
   //get items from DB
@@ -72,6 +83,7 @@ export default class Programme extends Component {
             chapitre={currentChapitre}
             key={currentChapitre._id}
             sousChapitre={this.sousChapitreList(currentChapitre._id)}
+            handleClick={this.handleClick}
           />
         );
       });
@@ -90,6 +102,7 @@ export default class Programme extends Component {
               sousChapitre={currentSousChapitre}
               key={currentSousChapitre._id}
               article={this.articleList(currentSousChapitre)}
+              handleClick={this.handleClick}
             />
           );
         });
@@ -99,13 +112,38 @@ export default class Programme extends Component {
   articleList(sousChapitreID) {
     if (this.state.articles) {
       return this.state.articles.map((currentArticle) => {
-        return <Article article={currentArticle} key={currentArticle._id} />;
+        return (
+          <Article
+            article={currentArticle}
+            key={currentArticle._id}
+            handleClick={this.handleClick}
+          />
+        );
       });
     }
   }
 
+  handleClose() {
+    this.setState({ show: false });
+  }
+
+  handleShow() {
+    this.setState({ show: true });
+  }
+
+  handleClick() {
+    // switch the value of the showModal state
+    this.setState({
+      showModal: !this.state.showModal,
+    });
+  }
+
   render() {
     const { useStyles } = this.props;
+    if (this.state.showModal) {
+      // show the modal if state showModal is true
+      return <ListModal show={this.handleShow} onHide={this.handleClick} />;
+    }
     return (
       <div>
         <div className="just-padding">

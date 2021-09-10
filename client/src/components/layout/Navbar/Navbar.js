@@ -6,9 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGripLines,
   faSignOutAlt,
-  faUsers ,
-  faCoins ,
-  faNewspaper ,
+  faUsers,
+  faCoins,
+  faNewspaper,
   faUser,
   faCheck,
   faCog,
@@ -41,77 +41,78 @@ const Navbar = (props) => {
 
   const userMenu = (
     <>
-      {
-        user && user.username === 'admin' ? 
-
+      {user && user.username === "admin" ? (
         <Dropdown alignRight>
-        <Dropdown.Toggle variant="outline-light">
-          Hey, <strong>{user && user.username}</strong> 👋
-        </Dropdown.Toggle>
+          <Dropdown.Toggle variant="outline-light">
+            Hey, <strong>{user && user.username}</strong> 👋
+          </Dropdown.Toggle>
 
-        <Dropdown.Menu>
-                  <Link className='dropdown-item' to='/users'>
-                    <FontAwesomeIcon className='icon mr-2' icon={faUsers} size="lg" />
-                      Manage Users
-                  </Link> 
-                  <Link  className="dropdown-item" to="/pending">
-                    <FontAwesomeIcon className="icon mr-2" icon={faCheck} size="lg" />
-                      Pending requests
-                  </Link>
-                  <Link className='dropdown-item' to='/budget'>
-                    <FontAwesomeIcon className='icon mr-2' icon={faCoins} size="lg" />
-                      Budget
-                  </Link> 
-                  <Link className="dropdown-item" to="/settings">
-                    <FontAwesomeIcon className="icon mr-2" icon={faCog} size="lg" />
-                      Settings
-                  </Link> 
-          <Dropdown.Divider></Dropdown.Divider>
-          <button onClick={() => onLogout()} className="dropdown-item">
-            <FontAwesomeIcon
-              className="icon mr-3"
-              icon={faSignOutAlt}
-              size="lg"
-            />
-            Logout
-          </button>
-        </Dropdown.Menu>
-      </Dropdown>
+          <Dropdown.Menu>
+            <Link className="dropdown-item" to="/users">
+              <FontAwesomeIcon className="icon mr-2" icon={faUsers} size="lg" />
+              Manage Users
+            </Link>
+            <Link className="dropdown-item" to="/pending">
+              <FontAwesomeIcon className="icon mr-2" icon={faCheck} size="lg" />
+              Pending requests
+            </Link>
+            <Link className="dropdown-item" to="/budget">
+              <FontAwesomeIcon className="icon mr-2" icon={faCoins} size="lg" />
+              Budget
+            </Link>
+            <Link className="dropdown-item" to="/settings">
+              <FontAwesomeIcon className="icon mr-2" icon={faCog} size="lg" />
+              Settings
+            </Link>
+            <Dropdown.Divider></Dropdown.Divider>
+            <button onClick={() => onLogout()} className="dropdown-item">
+              <FontAwesomeIcon
+                className="icon mr-3"
+                icon={faSignOutAlt}
+                size="lg"
+              />
+              Logout
+            </button>
+          </Dropdown.Menu>
+        </Dropdown>
+      ) : (
+        <Dropdown alignRight>
+          <Dropdown.Toggle variant="outline-light">
+            Hey, <strong>{user && user.username}</strong> 👋
+          </Dropdown.Toggle>
 
-      :
-      
-      <Dropdown alignRight>
-        <Dropdown.Toggle variant="outline-light">
-          Hey, <strong>{user && user.username}</strong> 👋
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          <Link
-            to={`/u/${user ? user.username : ""}`}
-            className="dropdown-item"
-          >
-            <FontAwesomeIcon className="icon mr-3" icon={faUser} size="lg" />
-            Profile
-          </Link>
-          <Link to="/messages" className="dropdown-item">
-            <FontAwesomeIcon className="icon mr-3" icon={faNewspaper} size="lg" />
-            Messages 
-          </Link>
-          <Link to="/settings" className="dropdown-item">
-            <FontAwesomeIcon className="icon mr-3" icon={faCog} size="lg" />
-            Settings
-          </Link>
-          <Dropdown.Divider></Dropdown.Divider>
-          <button onClick={() => onLogout()} className="dropdown-item">
-            <FontAwesomeIcon
-              className="icon mr-3"
-              icon={faSignOutAlt}
-              size="lg"
-            />
-            Logout
-          </button>
-        </Dropdown.Menu>
-      </Dropdown>  }
+          <Dropdown.Menu>
+            <Link
+              to={`/u/${user ? user.username : ""}`}
+              className="dropdown-item"
+            >
+              <FontAwesomeIcon className="icon mr-3" icon={faUser} size="lg" />
+              Profile
+            </Link>
+            <Link to="/messages" className="dropdown-item">
+              <FontAwesomeIcon
+                className="icon mr-3"
+                icon={faNewspaper}
+                size="lg"
+              />
+              Messages
+            </Link>
+            <Link to="/settings" className="dropdown-item">
+              <FontAwesomeIcon className="icon mr-3" icon={faCog} size="lg" />
+              Settings
+            </Link>
+            <Dropdown.Divider></Dropdown.Divider>
+            <button onClick={() => onLogout()} className="dropdown-item">
+              <FontAwesomeIcon
+                className="icon mr-3"
+                icon={faSignOutAlt}
+                size="lg"
+              />
+              Logout
+            </button>
+          </Dropdown.Menu>
+        </Dropdown>
+      )}
     </>
   );
 
@@ -179,11 +180,23 @@ const Navbar = (props) => {
                 Offers
               </Link>
             </li>
-            
+
             <li className="nav-item">
               <Link className="nav-link" to="/contact">
                 Contact
               </Link>
+            </li>
+            <li className="nav-item">
+              {/* admin program and user program */}
+              {user && user.username == "admin" ? (
+                <Link className="nav-link" to="/programmeAdmin">
+                  Programme
+                </Link>
+              ) : (
+                <Link className="nav-link" to="/programme">
+                  Programme
+                </Link>
+              )}
             </li>
           </ul>
 

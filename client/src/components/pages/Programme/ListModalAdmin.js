@@ -79,7 +79,6 @@ const ListModal = (props) => {
                   type="text"
                   name="username"
                   ref={titleADD}
-                  defaultValue={element.titre}
                 />
               </Form.Group>
               <Form.Group>
@@ -89,7 +88,6 @@ const ListModal = (props) => {
                   type="textarea"
                   name="name"
                   ref={descriptionADD}
-                  defaultValue={element.description}
                 />
               </Form.Group>
               <input

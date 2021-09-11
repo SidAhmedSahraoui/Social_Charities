@@ -24,9 +24,8 @@ import Soc from "./pages/Offers/description/Soc";
 import Sol from "./pages/Offers/description/Sol";
 import Oth from "./pages/Offers/description/Oth";
 import Requests from "./pages/Dropdown/Requests/requests";
-import Programme from "./pages/Programme/Programme";
-import Budget from './pages/Dropdown/Budget/budget';
-import Users from './pages/Dropdown/users/users';
+import Budget from "./pages/Dropdown/Budget/budget";
+import Users from "./pages/Dropdown/users/users";
 import Programme from "./pages/Programme/Programme";
 import ProgrammeAdmin from "./pages/Programme/ProgrammeAdmin";
 // Routes
@@ -46,9 +45,9 @@ function App() {
             <PrivateRoute exact path="/u/:username" component={Profile} />
             <PrivateRoute exact path="/settings" component={Settings} />
             <PrivateRoute exact path="/request" component={Request} />
-            <AdminRoute exact path='/pending' component={Requests}  />
-            <AdminRoute exact path='/users' component={Users}  />
-            <AdminRoute exact path='/budget' component={Budget}  />
+            <AdminRoute exact path="/pending" component={Requests} />
+            <AdminRoute exact path="/users" component={Users} />
+            <AdminRoute exact path="/budget" component={Budget} />
             <AdminRoute
               exact
               path="/programmeAdmin"

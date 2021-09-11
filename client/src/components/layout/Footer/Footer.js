@@ -18,7 +18,7 @@ const Footer = () => {
               ❤️
               </span>{' '} By {' '}
               <a className='gh'
-                href='https://github.com/sidahmedsahraoui'
+                href='https://github.com/sidahmedsahraoui/Full-Project'
                 target='_blank'
                 rel='noopener noreferrer'
               >{`<Github />`}</a>

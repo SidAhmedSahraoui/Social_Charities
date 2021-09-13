@@ -261,6 +261,20 @@ export default class Programme extends Component {
     return (
       <div>
         <div className="just-padding">
+          <button
+            className="button d-flex"
+            onClick={() => {
+              // switch the value of the showModal state
+              this.setState({
+                article_type: "addChapitre",
+              });
+              this.setState({
+                showModal: !this.state.showModal,
+              });
+            }}
+          >
+            add new chapter
+          </button>
           <div className="list-group list-group-root well">
             <tbody>{this.chapitreList()}</tbody>
           </div>

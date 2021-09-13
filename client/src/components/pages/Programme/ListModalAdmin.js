@@ -13,6 +13,8 @@ const ListModal = (props) => {
   let descriptionEdit = React.createRef();
   let titleEdit = React.createRef();
 
+
+  //remove an item from DB
   function handleRemove() {
     var Link = "";
     var result = window.confirm("Do you want to continue?");
@@ -22,18 +24,59 @@ const ListModal = (props) => {
         Link = "http://localhost:5000/chapitres/" + element._id;
       else if (articleType == "sousChapitre")
         Link = "http://localhost:5000/sous_chapitres/" + element._id;
-      else Link = "http://localhost:5000/articles/" + element._id;
+      else if (articleType == "article")
+        Link = "http://localhost:5000/articles/" + element._id;
       Axios.delete(Link);
     }
   }
+
+  //edit an item
   function handelSubmitEdit(e) {
-    console.log(descriptionEdit.current.value);
-    console.log(titleEdit.current.value);
+    var Link ="";
+    var confirm = window.confirm("Are you sure ?");
+    var json = {titre: titleEdit.current.value,
+                description : descriptionEdit.current.value};
+
+    if (articleType == "chapitre")
+        Link = "http://localhost:5000/chapitres/update/" + element._id;
+      else if (articleType == "sousChapitre")
+        Link = "http://localhost:5000/sous_chapitres/update/" + element._id;
+      else if (articleType == "article")
+        Link = "http://localhost:5000/articles/update/" + element._id;
+    if(confirm){
+      Axios.post(Link, json)
+        .then((response) => {
+          console.log(response);
+          window.location.reload(false);
+        }, (error) => {
+          console.log(error);
+        });}
+    // console.log(descriptionEdit.current.value);
+    // console.log(titleEdit.current.value);
   }
 
   function handelSubmitADD(e) {
-    console.log(descriptionADD.current.value);
-    console.log(titleADD.current.value);
+    var Link ="";
+    var confirm = window.confirm("Are you sure ?");
+    var json = {titre: titleADD.current.value,
+                description : descriptionADD.current.value};
+
+    if (articleType == "chapitre")
+        Link = "http://localhost:5000/chapitres/add/";
+      else if (articleType == "sousChapitre")
+        Link = "http://localhost:5000/sous_chapitres/add/";
+      else if (articleType == "article")
+        Link = "http://localhost:5000/articles/add/";
+    if(confirm){
+      Axios.post(Link, json)
+        .then((response) => {
+          console.log("element ajouté");
+          window.location.reload(false);
+        }, (error) => {
+          console.log(error);
+        });}
+    // console.log(descriptionADD.current.value);
+    // console.log(titleADD.current.value);
   }
 
   return (

@@ -32,7 +32,7 @@ import MyRequests from "./pages/Dropdown/MyRequests/MyRequests";
 import Contact from "./pages/Contact/contact";
 // Routes
 import PrivateRoute from "./routes/PrivateRoute";
-// import AdminRoute from "./routes/AdminRoute";
+import AdminRoute from "./routes/AdminRoute";
 
 function App() {
   return (

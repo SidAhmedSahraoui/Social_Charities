@@ -12,6 +12,8 @@ import {
   faUser,
   faCheck,
   faCog,
+  faPaperPlane,
+  faArchive,
 } from "@fortawesome/free-solid-svg-icons";
 import { Dropdown } from "react-bootstrap";
 
@@ -53,8 +55,20 @@ const Navbar = (props) => {
               Manage Users
             </Link>
             <Link className="dropdown-item" to="/pending">
-              <FontAwesomeIcon className="icon mr-2" icon={faCheck} size="lg" />
-              Pending requests
+              <FontAwesomeIcon
+                className="icon mr-2"
+                icon={faPaperPlane}
+                size="lg"
+              />
+              Pending Requests
+            </Link>
+            <Link className="dropdown-item" to="/meeting">
+              <FontAwesomeIcon
+                className="icon mr-2"
+                icon={faArchive}
+                size="lg"
+              />
+              Meetings
             </Link>
             <Link className="dropdown-item" to="/budget">
               <FontAwesomeIcon className="icon mr-2" icon={faCoins} size="lg" />
@@ -89,13 +103,17 @@ const Navbar = (props) => {
               <FontAwesomeIcon className="icon mr-3" icon={faUser} size="lg" />
               Profile
             </Link>
-            <Link to="/messages" className="dropdown-item">
+            <Link to="/notification" className="dropdown-item">
               <FontAwesomeIcon
                 className="icon mr-3"
                 icon={faNewspaper}
                 size="lg"
               />
-              Messages
+              Notifications
+            </Link>
+            <Link to="/myrequests" className="dropdown-item">
+              <FontAwesomeIcon className="icon mr-3" icon={faCheck} size="lg" />
+              My requests
             </Link>
             <Link to="/settings" className="dropdown-item">
               <FontAwesomeIcon className="icon mr-3" icon={faCog} size="lg" />
@@ -119,13 +137,8 @@ const Navbar = (props) => {
   const guestMenu = (
     <>
       <li className="nav-item">
-        <Link className="nav-link link-primary my-sm-0 mr-2" to="/login">
+        <Link className="nav-link button-primary my-sm-0 mr-2" to="/login">
           Sign in
-        </Link>
-      </li>
-      <li className="nav-item">
-        <Link className="nav-link button-primary my-sm-0" to="/register">
-          Register
         </Link>
       </li>
     </>
@@ -144,7 +157,7 @@ const Navbar = (props) => {
   return (
     <nav className={`${classes.navbar} navbar navbar-expand-lg navbar-light `}>
       <div className="container">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/offersAdmin">
           <img className="logo" src={Logo} alt="Dirlkhir" />
         </Link>
         <button
@@ -171,21 +184,24 @@ const Navbar = (props) => {
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <ul className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link className="nav-link" to="/request">
-                Requests
-              </Link>
+              {user && user.username == "admin" ? null : (
+                <Link className="nav-link" to="/request">
+                  Requests
+                </Link>
+              )}
             </li>
             <li className="nav-item">
-              <Link className="nav-link" to="/offers">
-                Offers
-              </Link>
+              {user && user.username == "admin" ? (
+                <Link className="nav-link" to="/offersAdmin">
+                  Offers
+                </Link>
+              ) : (
+                <Link className="nav-link" to="/offers">
+                  Offers
+                </Link>
+              )}
             </li>
 
-            <li className="nav-item">
-              <Link className="nav-link" to="/contact">
-                Contact
-              </Link>
-            </li>
             <li className="nav-item">
               {/* admin program and user program */}
               {user && user.username == "admin" ? (
@@ -195,6 +211,13 @@ const Navbar = (props) => {
               ) : (
                 <Link className="nav-link" to="/programme">
                   Programme
+                </Link>
+              )}
+            </li>
+            <li className="nav-item">
+              {user && user.username == "admin" ? null : (
+                <Link className="nav-link" to="/contact">
+                  Contact
                 </Link>
               )}
             </li>

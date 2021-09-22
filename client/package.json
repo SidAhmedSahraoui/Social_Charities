@@ -27,6 +27,7 @@
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.3.0",
+    "typewriter-effect": "^2.18.0",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.12"
   },

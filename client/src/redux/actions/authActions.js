@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 import {
   REGISTER_SUCCESS,
@@ -15,9 +15,9 @@ import {
   AUTH_ERROR,
   SETTINGS_ERROR,
   CLEAR_ERRORS,
-} from '../types';
+} from "../types";
 
-import setAuthToken from '../../utils/setAuthToken';
+import setAuthToken from "../../utils/setAuthToken";
 
 // Load User
 export const loadUser = () => async (dispatch) => {
@@ -32,7 +32,7 @@ export const loadUser = () => async (dispatch) => {
 
   try {
     dispatch(setLoading());
-    const res = await axios.get('/api/auth');
+    const res = await axios.get("/api/auth");
 
     dispatch({
       type: USER_LOADED,
@@ -59,7 +59,7 @@ export const loadSettings = () => async (dispatch) => {
 
   try {
     dispatch(setLoadingSettings());
-    const res = await axios.get('/api/auth');
+    const res = await axios.get("/api/auth");
 
     dispatch({
       type: SETTINGS_LOADED,
@@ -77,14 +77,14 @@ export const loadSettings = () => async (dispatch) => {
 export const updateProfile = (formData) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
   try {
     dispatch(setLoadingSettings());
 
-    const res = await axios.put('api/users', formData, config);
+    const res = await axios.put("api/users", formData, config);
 
     dispatch({ type: UPDATE_SETTINGS, payload: res.data });
 
@@ -102,14 +102,14 @@ export const updateProfile = (formData) => async (dispatch) => {
 export const updatePassword = (formData) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
   try {
     dispatch(setLoadingSettings());
 
-    const res = await axios.put('api/users/password', formData, config);
+    const res = await axios.put("api/users/password", formData, config);
 
     dispatch({ type: UPDATE_PASSWORD, payload: res.data });
 
@@ -127,21 +127,21 @@ export const updatePassword = (formData) => async (dispatch) => {
 export const register = (formData) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
   try {
     dispatch(setLoading());
 
-    const res = await axios.post('/api/users', formData, config);
+    const res = await axios.post("/api/users", formData, config);
 
     dispatch({
       type: REGISTER_SUCCESS,
       payload: res.data,
     });
 
-    dispatch(loadUser());
+    //dispatch(loadUser());
   } catch (error) {
     dispatch({
       type: REGISTER_FAIL,
@@ -154,14 +154,14 @@ export const register = (formData) => async (dispatch) => {
 export const login = (formData) => async (dispatch) => {
   const config = {
     headers: {
-      'Content-Type': 'application/json',
+      "Content-Type": "application/json",
     },
   };
 
   try {
     dispatch(setLoading());
 
-    const res = await axios.post('api/auth', formData, config);
+    const res = await axios.post("api/auth", formData, config);
 
     dispatch({
       type: LOGIN_SUCCESS,

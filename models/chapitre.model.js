@@ -1,22 +1,18 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
-/*
-const sous_chapitreSChema = new Schema({
-    titre: {type: String, required: true},
-    description: {type: String, required: true},
-    chapitreId: {type: String , required: true}},
-    {timestamps: true}
-);
-*/
-const chapitreSChema = new Schema({
-    titre: {type: String, required: true},
-    description: {type: String, required: true}/*,
-    sousChapitres: [sous_chapitreSChema]*/
-},
-    {timestamps: true}
+
+const chapitreSChema = new Schema(
+  {
+    titre: { type: String, required: true },
+    description: { type: String, required: true },
+    credit: { type: Number, required: true, default: 0 },
+    debit: { type: Number, required: true, default: 0 },
+    sold: { type: Number, required: true, default: 0 },
+  },
+  { timestamps: true }
 );
 
-const Chapitre = mongoose.model('Chapitre', chapitreSChema);
+const Chapitre = mongoose.model("Chapitre", chapitreSChema);
 
 module.exports = Chapitre;

@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
 
 // Actions
 import {
   getRequests,
-  approveRequest,
-  // declineRequest,
+  /* approveRequest,
+  deleteRequest,*/
   clearErrors,
 } from "../../../../redux/actions/requestActions";
 import { setAlert } from "../../../../redux/actions/alertActions";
@@ -15,15 +15,13 @@ import { setAlert } from "../../../../redux/actions/alertActions";
 import RequestCard from "./RequestCard";
 // Components
 
-import useStyles from "../../../layout/Navbar/navbar-jss";
+import useStyles from "./pending-jss";
 
 // Utils
 import { WEBSITE_NAME } from "../../../../utils/Data";
 
 const Requests = (props) => {
   const classes = useStyles();
-
-  const [request, setRequest] = useState("");
 
   const {
     requests,
@@ -32,8 +30,8 @@ const Requests = (props) => {
     getRequests,
     clearErrors,
     setAlert,
-    approveRequest,
-    declineRequest,
+    /*approveRequest,
+      deleteRequest,*/
   } = props;
 
   useEffect(() => {
@@ -51,20 +49,10 @@ const Requests = (props) => {
       } else {
         setAlert(error, "danger");
       }
-
-      clearErrors();
     }
-
+    clearErrors();
     // eslint-disable-next-line
-  }, [error]);
-
-  const approve = async (id) => {
-    await approveRequest(id);
-  };
-
-  const decline = async (id) => {
-    await declineRequest(id);
-  };
+  }, []);
 
   return (
     <>
@@ -73,35 +61,28 @@ const Requests = (props) => {
       </Helmet>
       <>
         <div className={`${classes.page} card-shadow text-center`}>
-          <div className="messages mx-auto">
-            <h3 className="title">All requests</h3>
-            {loading ? (
-              <div className="cards-container mt-5">
-                <RequestCard isLoading={true} />
-                <RequestCard isLoading={true} />
-              </div>
-            ) : !requests || !requests.length ? (
-              <div className="empty">
-                <h6 className="title mt-5">
-                  Empty inbox{" "}
-                  <span role="img" aria-label="sad">
-                    😥
-                  </span>
-                </h6>
-              </div>
-            ) : (
-              <div className="cards-container mt-5">
-                {requests.map((request) => (
-                  <RequestCard
-                    key={request._id}
-                    request={request}
-                    approveRequest={approve(request._id)}
-                    declineRequest={decline(request._id)}
-                  />
-                ))}
-              </div>
-            )}
-          </div>
+          <h3 className="title">All requests</h3>
+          {loading ? (
+            <div className="cards-container mt-5">
+              <RequestCard isLoading={true} />
+              <RequestCard isLoading={true} />
+            </div>
+          ) : !requests || !requests.length ? (
+            <div className="empty">
+              <h6 className="title mt-5">
+                Empty inbox{" "}
+                <span role="img" aria-label="sad">
+                  😥
+                </span>
+              </h6>
+            </div>
+          ) : (
+            <div className="container mt-5">
+              {requests.map((request) => (
+                <RequestCard key={request._id} request={request} />
+              ))}
+            </div>
+          )}
         </div>
       </>
     </>
@@ -116,8 +97,6 @@ const mapSateToProps = (state) => ({
 
 export default connect(mapSateToProps, {
   getRequests,
-  approveRequest,
-  // declineRequest,
   clearErrors,
   setAlert,
 })(Requests);

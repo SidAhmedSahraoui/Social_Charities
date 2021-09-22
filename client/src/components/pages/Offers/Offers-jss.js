@@ -9,10 +9,6 @@ const useStyles = createUseStyles({
       borderRadius: "10px",
       "box-shadow": "0px 13px 26px rgb(109,184,241, 0.16)",
 
-      "& .img": {
-        maxWidth: "50px",
-        maxHeight: "50px",
-      },
       "& .title": {
         color: "#2d3748",
         fontWeight: "600",
@@ -31,6 +27,17 @@ const useStyles = createUseStyles({
         padding: "8px 20px !important",
         "&:not([disabled]):hover": {
           background: "#0ca678",
+        },
+      },
+      "& .button-secondary": {
+        background: " #f06595",
+        border: 0,
+        borderRadius: "10px",
+        fontWeight: 600,
+        color: "#fff !important",
+        padding: "8px 20px !important",
+        "&:not([disabled]):hover": {
+          background: "#c2255c",
         },
       },
       "& .boxs": {

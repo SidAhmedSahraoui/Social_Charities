@@ -5,7 +5,6 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import Axios from "axios";
 import "./ListModal.css";
 import { Form } from "react-bootstrap";
-var parse = require("html-react-parser");
 
 const ListModal = (props) => {
   const { show, onHide, element, articleType } = props;
@@ -49,8 +48,14 @@ const ListModal = (props) => {
       Link = "http://localhost:5000/chapitres/update/" + element._id;
     else if (articleType == "sousChapitre")
       Link = "http://localhost:5000/sous_chapitres/update/" + element._id;
-    else if (articleType == "article")
+    else if (articleType == "article") {
       Link = "http://localhost:5000/articles/update/" + element._id;
+      json = {
+        titre: titleEdit.current.value,
+        designation: descriptionEdit.current.value,
+      };
+    }
+
     if (confirm) {
       Axios.post(Link, json).then(
         (response) => {
@@ -133,13 +138,23 @@ const ListModal = (props) => {
                   </Form.Group>
                   <Form.Group>
                     <Form.Label className="subtitle">Description:</Form.Label>
-                    <textarea
-                      className="input"
-                      type="textarea"
-                      name="name"
-                      ref={descriptionEdit}
-                      defaultValue={element.description}
-                    />
+                    {articleType != "article" ? (
+                      <textarea
+                        className="input"
+                        type="textarea"
+                        name="name"
+                        ref={descriptionEdit}
+                        defaultValue={element.description}
+                      />
+                    ) : (
+                      <textarea
+                        className="input"
+                        type="textarea"
+                        name="name"
+                        ref={descriptionEdit}
+                        defaultValue={element.designation}
+                      />
+                    )}
                   </Form.Group>
                   <input
                     className="button d-flex"

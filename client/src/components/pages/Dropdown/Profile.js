@@ -1,19 +1,19 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
-import { Container, Form } from 'react-bootstrap';
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import Helmet from "react-helmet";
+import { Container, Form } from "react-bootstrap";
 
 // Actions
-import { loadUserProfile } from '../../../redux/actions/userActions';
-import { setAlert } from '../../../redux/actions/alertActions';
+import { loadUserProfile } from "../../../redux/actions/userActions";
+import { setAlert } from "../../../redux/actions/alertActions";
 
 // Utils
-import { WEBSITE_NAME } from '../../../utils/Data';
+import { WEBSITE_NAME } from "../../../utils/Data";
 
 // App layout components
-import MalePicture from '../../../svg/male_avatar.svg';
-import FemalePicture from '../../../svg/female_avatar.svg'
-import OtherPicture from '../../../svg/male_avatar.svg'
+import MalePicture from "../../../svg/male_avatar.svg";
+import FemalePicture from "../../../svg/female_avatar.svg";
+import OtherPicture from "../../../svg/male_avatar.svg";
 
 const Profile = (props) => {
   const {
@@ -25,9 +25,7 @@ const Profile = (props) => {
     clearErrors,
     setAlert,
   } = props;
-  const { _id, name, username, post, email , gender } =
-    user || {};
-
+  const { _id, name, username, post, email, gender } = user || {};
 
   useEffect(() => {
     loadUserProfile(match.params.username);
@@ -43,12 +41,12 @@ const Profile = (props) => {
 
   useEffect(() => {
     if (error_send && error_send.length) {
-      if (typeof error_send === 'object') {
+      if (typeof error_send === "object") {
         error_send.forEach((err) => {
-          setAlert(err.msg, 'danger');
+          setAlert(err.msg, "danger");
         });
       } else {
-        setAlert(error_send, 'danger');
+        setAlert(error_send, "danger");
       }
 
       clearErrors();
@@ -57,60 +55,36 @@ const Profile = (props) => {
     // eslint-disable-next-line
   }, [error_send]);
 
-  
-
   return (
     <>
       <Helmet>
         <title>{`${WEBSITE_NAME} | ${
-          loading ? 'Loading...' : username || 'Not found'
+          loading ? "Loading..." : username || "Not found"
         }`}</title>
       </Helmet>
       <Container>
-        <div className='container-inner px-3 mt-4 text-center'>
-            <div className='profile mx-auto'>
-              <img
-                className='picture'
-                src={
-                  gender === 1
-                    ? MalePicture
-                    : gender === 2
-                    ? FemalePicture
-                    : OtherPicture
-                }
-                alt='Profile'
-              />
-              
+        <div className="container-inner px-3 mt-4 text-center">
+          <div className="profile mx-auto">
+            <img
+              className="picture"
+              src={
+                gender === 1
+                  ? MalePicture
+                  : gender === 2
+                  ? FemalePicture
+                  : OtherPicture
+              }
+              alt="Profile"
+            />
 
-              <div className='user-details mt-4'>
-                <h3 className='name'>{name || username}</h3>
-                <p className='bio'>
-                  {'Post : ' + post }
-                </p>
-                <p className='bio'>
-                  {'email : ' + email }
-                </p>                
-              </div>
-              
-                    <Form.Group>
-
-                    <div className='share mt-5'>
-                       <h6>All sent requests</h6>
-                       <p className='mt-2'>
-                    
-
-                      </p>
-                   </div>
-
-                    </Form.Group>
-
-                    <div className='links d-flex align-items-center justify-content-center mt-4'>
-                      
-                      
-                      
-                    </div>    
-                
+            <div className="user-details mt-4">
+              <h3 className="name">{name || username}</h3>
+              <p className="bio">{"Post : " + post}</p>
+              <p className="bio">{"email : " + email}</p>
             </div>
+
+            <div className="links d-flex align-items-center justify-content-center mt-4"></div>
+          </div>
         </div>
       </Container>
     </>

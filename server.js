@@ -4,6 +4,8 @@ const path = require("path");
 
 const app = express();
 
+var cors = require("cors");
+app.use(cors());
 // Connect mongoDB
 
 connectDB();
@@ -14,9 +16,24 @@ app.use(express.json({ extended: false }));
 
 // Routes
 app.use("/api/users", require("./routes/users"));
+app.use("/users", require("./routes/users2"));
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/request", require("./routes/request"));
+app.use("/requests", require("./routes/requests"));
+app.use("/api/meeting", require("./routes/meeting"));
+app.use("/notifications", require("./routes/notifications"));
+app.use("/budget", require("./routes/budget"));
 
+//new routes
+const chapitreRouter = require("./routes/chapitres");
+const sous_chapitreRouter = require("./routes/sous_chapitres");
+const articleRouter = require("./routes/articles");
+const offreRouter = require("./routes/offres");
+
+app.use("/chapitres", chapitreRouter);
+app.use("/sous_chapitres", sous_chapitreRouter);
+app.use("/articles", articleRouter);
+app.use("/offres", offreRouter);
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {
   // Set static folder

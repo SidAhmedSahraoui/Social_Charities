@@ -19,15 +19,17 @@ import NotFound from "./pages/NotFound";
 import Home from "./pages/Home/Home";
 import Offers from "./pages/Offers/Offers";
 import Request from "./pages/Requests/Request";
-import Hea from "./pages/Offers/description/Hea";
-import Soc from "./pages/Offers/description/Soc";
-import Sol from "./pages/Offers/description/Sol";
-import Oth from "./pages/Offers/description/Oth";
 import Requests from "./pages/Dropdown/Requests/requests";
 import Budget from "./pages/Dropdown/Budget/budget";
 import Users from "./pages/Dropdown/users/users";
 import Programme from "./pages/Programme/Programme";
 import ProgrammeAdmin from "./pages/Programme/ProgrammeAdmin";
+import OffersAdmin from "./pages/Offers/OffersAdmin";
+import Notification from "./pages/Dropdown/Notification/Notification";
+import Meeting from "./pages/Dropdown/Meetings/meeting";
+import AddMeeting from "./pages/Dropdown/Meetings/addMeeting";
+import MyRequests from "./pages/Dropdown/MyRequests/MyRequests";
+import Contact from "./pages/Contact/contact";
 // Routes
 import PrivateRoute from "./routes/PrivateRoute";
 import AdminRoute from "./routes/AdminRoute";
@@ -41,25 +43,27 @@ function App() {
           <Alert />
           <Switch>
             <Route exact path="/login" component={Login} />
-            <Route exact path="/register" component={Register} />
+            <AdminRoute exact path="/register" component={Register} />
             <PrivateRoute exact path="/u/:username" component={Profile} />
             <PrivateRoute exact path="/settings" component={Settings} />
             <PrivateRoute exact path="/request" component={Request} />
+            <PrivateRoute exact path="/notification" component={Notification} />
+            <PrivateRoute exact path="/myrequests" component={MyRequests} />
             <AdminRoute exact path="/pending" component={Requests} />
             <AdminRoute exact path="/users" component={Users} />
             <AdminRoute exact path="/budget" component={Budget} />
+            <AdminRoute exact path="/meeting" component={Meeting} />
+            <AdminRoute exact path="/add-meeting" component={AddMeeting} />
             <AdminRoute
               exact
               path="/programmeAdmin"
               component={ProgrammeAdmin}
             />
+            <AdminRoute exact path="/offersAdmin" component={OffersAdmin} />
             <Route exact path="/" component={Home} />
             <Route exact path="/offers" component={Offers} />
-            <Route exact path="/offers/hea" component={Hea} />
-            <Route exact path="/offers/soc" component={Soc} />
-            <Route exact path="/offers/sol" component={Sol} />
-            <Route exact path="/offers/oth" component={Oth} />
             <Route exact path="/programme" component={Programme} />
+            <Route exact path="/contact" component={Contact} />
             <Route exact path="/404" component={NotFound} />
             <Route component={NotFound} />
           </Switch>

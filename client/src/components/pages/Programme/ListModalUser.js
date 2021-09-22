@@ -18,14 +18,15 @@ const ListModal = (props) => {
             <span className="content">
               <Form.Group>
                 <Form.Label className="subtitle">Title:</Form.Label>
-                <h5 className="text">{element.titre} asdfsdfsadf</h5>
+                <h5 className="text">{element.titre}</h5>
               </Form.Group>
               <Form.Group>
                 <Form.Label className="subtitle">Description:</Form.Label>
-                <p className="text">
-                  {element.description} fasd;f dfjal;sd fjsdlf j
-                  sadflksdajfsadlfjdsfal jdsf
-                </p>
+                {articleType != "article" ? (
+                  <p className="text">{element.description}</p>
+                ) : (
+                  <p className="text">{element.designation}</p>
+                )}
               </Form.Group>
             </span>
           </>

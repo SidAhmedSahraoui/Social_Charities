@@ -1,32 +1,36 @@
+import Axios from "axios";
 import React, { useState } from "react";
 
 //Redux
 import { connect } from "react-redux";
-import { getBudget } from '../../../../redux/actions/budgetActions';
+import { getBudget } from "../../../../redux/actions/budgetActions";
 
 const BudgetForm = ({ getBudget }) => {
   const [budget, setBudget] = useState("");
   const [error, setError] = useState("");
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     setBudget(e.target.value);
   };
 
-  const handleSubmit = e => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (budget === "") {
       setError("Must not be empty");
       return;
     }
-    getBudget(budget);
-    setBudget("");
+    Axios.post("http://localhost:5000/budget/plus/", {
+      amount: Number(budget),
+    })
+      .then(() => window.location.reload(false))
+      .catch((error) => console.log(error));
   };
 
   return (
-    <div className='budgetForm mt-5'>
+    <div className="budgetForm mt-5">
       <p className="label">Budget</p>
       <form onSubmit={handleSubmit}>
-        <div className='inputGroup'>
+        <div className="inputGroup">
           <input
             type="number"
             placeholder="Add your budget..."
@@ -34,7 +38,7 @@ const BudgetForm = ({ getBudget }) => {
             value={budget}
             onChange={handleChange}
           />
-          < br />
+          <br />
           {error && <p className="error">{error}</p>}
           <button type="submit" className="button">
             Add Budget
@@ -45,13 +49,10 @@ const BudgetForm = ({ getBudget }) => {
   );
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    getBudget: budget => dispatch(getBudget(budget))
+    getBudget: (budget) => dispatch(getBudget(budget)),
   };
 };
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(BudgetForm);
+export default connect(null, mapDispatchToProps)(BudgetForm);

@@ -33,6 +33,7 @@ const useStyles = createUseStyles({
     '& .messageitem': {
       ...POSTITEM_CARD,
       '& .icon': {
+        height: '100px',
         fontSize: '60px',
         color: colors['text-gray-700']
       },

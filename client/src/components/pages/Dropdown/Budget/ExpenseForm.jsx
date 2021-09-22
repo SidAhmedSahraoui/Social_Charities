@@ -63,6 +63,7 @@ const ExpenseForm = props => {
           />
           {error1 && <p className="error">{error1}</p>}
         </div>
+        <br/>
         <div className={style.inputGroup}>
           <input
             type="number"

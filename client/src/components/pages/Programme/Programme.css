@@ -34,6 +34,19 @@
 .list-group-item .glyphicon {
   margin-right: 5px;
 }
+.button-primary {
+  background: #f06595;
+  border: 0;
+  margin: 10px;
+  border-radius: 10px;
+  font-weight: 600;
+  color: #fff !important;
+  padding: 8px 20px !important;
+}
+
+.button-primary:hover {
+  background: #c2255c;
+}
 
 .text-link {
   color: #4a5568;
@@ -42,4 +55,7 @@
   float: right;
   margin-right: 20px;
   cursor: pointer;
+}
+.icons:hover {
+  color: #c2255c;
 }

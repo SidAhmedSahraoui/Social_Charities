@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./Programme.css";
 import axios from "axios";
 import ListModal from "./ListModalAdmin";
+import { BUTTON_PRIMARY } from "../../styles/Button";
 
 const Chapitre = (props) => (
   <div className="list-group-item">
@@ -104,7 +105,6 @@ export default class Programme extends Component {
       Selected: "",
       article_type: "",
     };
-
     //
     this.handleClick = this.handleClick.bind(this);
     this.handleShow = this.handleShow.bind(this);
@@ -262,7 +262,7 @@ export default class Programme extends Component {
       <div>
         <div className="just-padding">
           <button
-            className="button d-flex"
+            className="button-primary d-flex "
             onClick={() => {
               // switch the value of the showModal state
               this.setState({

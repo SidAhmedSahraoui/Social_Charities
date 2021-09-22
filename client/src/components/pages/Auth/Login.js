@@ -1,32 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
-import { Container, Form } from 'react-bootstrap';
-import useStyles  from './login-jss';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import Helmet from "react-helmet";
+import { Container, Form } from "react-bootstrap";
+import useStyles from "./login-jss";
 // Actions
-import { login, clearErrors } from '../../../redux/actions/authActions';
-import { setAlert } from '../../../redux/actions/alertActions';
+import { login, clearErrors } from "../../../redux/actions/authActions";
+import { setAlert } from "../../../redux/actions/alertActions";
 
 // App layout components
-import Spinner from '../../layout/Spinner/Spinner';
+import Spinner from "../../layout/Spinner/Spinner";
 
 // Utils
-import { WEBSITE_NAME } from '../../../utils/Data';
+import { WEBSITE_NAME } from "../../../utils/Data";
 
 const Login = (props) => {
-  const {
-    isAuthenticated,
-    error,
-    loading,
-    login,
-    clearErrors,
-    setAlert,
-  } = props;
+  const { isAuthenticated, error, loading, login, clearErrors, setAlert } =
+    props;
 
   const [user, setUser] = useState({
-    username: '',
-    password: '',
+    username: "",
+    password: "",
   });
 
   const { username, password } = user;
@@ -35,7 +29,7 @@ const Login = (props) => {
 
   useEffect(() => {
     if (isAuthenticated) {
-      props.history.push('/');
+      props.history.push("/");
     }
 
     // eslint-disable-next-line
@@ -43,12 +37,12 @@ const Login = (props) => {
 
   useEffect(() => {
     if (error && error.length) {
-      if (typeof error === 'object') {
+      if (typeof error === "object") {
         error.forEach((err) => {
-          setAlert(err.msg, 'danger');
+          setAlert(err.msg, "danger");
         });
       } else {
-        setAlert(error, 'danger');
+        setAlert(error, "danger");
       }
 
       clearErrors();
@@ -60,8 +54,8 @@ const Login = (props) => {
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (username === '' || password === '') {
-      setAlert('Please fill all fields', 'danger');
+    if (username === "" || password === "") {
+      setAlert("Please fill all fields", "danger");
     } else {
       await login({ username, password });
     }
@@ -74,50 +68,46 @@ const Login = (props) => {
         <title>{`${WEBSITE_NAME} | Login`}</title>
       </Helmet>
       <Container className={`${classes.root} `}>
-        <div className='container-inner px-3 mt-4'>
-          <div className='auth mx-auto'>
-            <h4 className='mb-3 text-center '>
-              <strong className='title'>Sign in</strong>
+        <div className="container-inner px-3 mt-4">
+          <div className="auth mx-auto">
+            <h4 className="mb-3 text-center ">
+              <strong className="title">Sign in</strong>
             </h4>
-              <Form.Group>
-                <Form.Label className='subtitle'> Email or username </Form.Label>
-                <Form.Control
-                  type='text'
-                  placeholder='Email or username'
-                  name='username'
-                  value={username}
-                  onChange={onChange}
-                />
-                
-              </Form.Group>
+            <Form.Group>
+              <Form.Label className="subtitle"> Email or username </Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Email or username"
+                name="username"
+                value={username}
+                onChange={onChange}
+              />
+            </Form.Group>
 
-              <Form.Group>
-               <Form.Label className='subtitle'> Password </Form.Label>
-                <Form.Control
-                  type='password'
-                  placeholder='Password'
-                  name='password'
-                  value={password}
-                  onChange={onChange}
-                />
-              </Form.Group>
+            <Form.Group>
+              <Form.Label className="subtitle"> Password </Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={password}
+                onChange={onChange}
+              />
+            </Form.Group>
 
-              <div className='links d-flex align-items-center justify-content-between mt-4'>
-                <span>
-                  Haven't account ?{' '}
-                  <Link className='link-secondary' to='/register'>
-                    Sign up
-                  </Link>
-                </span>
-
-                {loading ? (
-                  <Spinner />
-                ) : (
-                  <button className='button-primary' type='submit' onClick={onSubmit}>
-                    Sign in
-                  </button>
-                )}
-              </div>
+            <div className="links d-flex align-items-center justify-content-between mt-4">
+              {loading ? (
+                <Spinner />
+              ) : (
+                <button
+                  className="button-primary"
+                  type="submit"
+                  onClick={onSubmit}
+                >
+                  Sign in
+                </button>
+              )}
+            </div>
           </div>
         </div>
       </Container>

@@ -1,7 +1,10 @@
 # Social Charities
 
 **Social Charities** is a MERN app that provides some helpfull services for University staff
+### Screenshots
 
+<div><img src="./screenshots/SocialCharUI.png" width="800" alt="Home Page"></div>
+<br/>
 ### How to use
 
 1. Clone/Download the repo.
